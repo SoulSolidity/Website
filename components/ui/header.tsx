@@ -170,4 +170,6 @@ function Header1() {
     );
 }
 
+Header1.displayName = "Header1";
+
 export { Header1 };

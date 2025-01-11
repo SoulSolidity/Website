@@ -151,3 +151,4 @@ export function TimelineDemo() {
         <Timeline data={data} />
     );
 }
+TimelineDemo.displayName = "TimelineDemo";

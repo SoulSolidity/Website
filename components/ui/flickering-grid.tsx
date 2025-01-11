@@ -193,4 +193,6 @@ const FlickeringGrid: React.FC<FlickeringGridProps> = ({
   );
 };
 
+FlickeringGrid.displayName = "FlickeringGrid";
+
 export { FlickeringGrid };
