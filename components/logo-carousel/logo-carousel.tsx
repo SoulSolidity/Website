@@ -410,7 +410,8 @@ export function LogoCarouselDemo() {
     return (
         <div className="space-y-8 py-10">
             <div className="mx-auto flex w-full max-w-screen-lg flex-col items-center space-y-8">
-                <LogoCarousel columnCount={window.innerWidth >= 768 ? 5 : 3} logos={allLogos} />
+                {/* <LogoCarousel columnCount={window.innerWidth >= 768 ? 5 : 3} logos={allLogos} /> */}
+                <LogoCarousel columnCount={3} logos={allLogos} />
             </div>
         </div>
     );
