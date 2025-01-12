@@ -12,7 +12,6 @@ import { ModeToggle } from "@/components/toggle";
 import { SiteFooter } from "@/components/site-footer";
 
 import MobileNav from "@/components/mobile-nav";
-import { getCurrentUser } from "@/lib/session";
 
 const inter = Inter({ subsets: ["latin"] });
 
