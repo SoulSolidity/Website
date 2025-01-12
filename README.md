@@ -1,36 +1,88 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# QuotesAI
 
-## Getting Started
+QuotesAI is built using Next.js, Tailwind CSS, Shadcn-ui, Magic-ui, Supabase, NextAuth, and Prisma. It is powered by Vercel and the OpenAI API. It uses the Goodreads API to generate category-based quotes as per your current mood/vibe.
 
-First, run the development server:
+## Video Overview
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+Watch the video below for a quick overview of QuotesAI:
+
+https://github.com/DarkInventor/QuotesAI/assets/67015517/e59b2402-772b-4ede-a28d-951278e6c555
+
+
+## Environment Variables
+
+### Supabase Connection Pooling
+
+```
+DATABASE_URL=
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+### NextAuth Configuration
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+```
+NEXTAUTH_SECRET=
+NEXTAUTH_URL=http://localhost:3000
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+### Google OAuth Configuration
 
-## Learn More
+```
+GOOGLE_CLIENT_ID=
+GOOGLE_CLIENT_SECRET=
+```
 
-To learn more about Next.js, take a look at the following resources:
+### GitHub OAuth Configuration
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+```
+GITHUB_ID=
+GITHUB_SECRET=
+GITHUB_ACCESS_TOKEN=
+```
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+### Stripe Configuration
 
-## Deploy on Vercel
+```
+STRIPE_API_KEY=
+STRIPE_WEBHOOK_SECRET=
+```
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## Setup Instructions
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+1. **Clone the repository:**
+   ```sh
+   git clone https://github.com/DarkInventor/QuotesAI.git
+   cd QuotesAI
+   ```
+
+2. **Create and populate the `.env` file:**
+   ```sh
+   cp .env.example .env
+   ```
+   Edit the `.env` file and add your credentials.
+
+3. **Install dependencies:**
+   ```sh
+   pnpm install
+   ```
+
+4. **Run the development server:**
+   ```sh
+   pnpm run dev
+   ```
+
+5. **Open your browser and navigate to:**
+   ```
+   http://localhost:3000
+   ```
+
+## License
+
+This project is licensed under the MIT License. See the [LICENSE](https://github.com/DarkInventor/QuotesAI/blob/main/License.md) file for details.
+
+## Contributing
+
+1. Fork the repository.
+2. Create your feature branch (`git checkout -b feature/your-feature`).
+3. Commit your changes (`git commit -am 'Add some feature'`).
+4. Push to the branch (`git push origin feature/your-feature`).
+5. Create a new Pull Request.
