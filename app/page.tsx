@@ -1,6 +1,5 @@
 "use client";
 
-import { Hero } from "@/components/ui/animated-hero";
 import { Boxes } from "@/components/ui/background-boxes";
 import { FlickeringGrid } from "@/components/ui/flickering-grid";
 import { Footerdemo } from "@/components/ui/footer-section";
@@ -10,6 +9,8 @@ import { cn } from "@/lib/utils";
 import Image from "next/image";
 import { LogoCarouselDemo } from "@/components/logo-carousel/logo-carousel";
 import { Header1 } from "@/components/ui/header";
+import Footer7 from "@/components/Footer/Footer";
+import Hero from "@/components/Hero/Hero";
 
 export default function Home() {
   return (
@@ -19,7 +20,7 @@ export default function Home() {
         <div className="z-10">
           <Hero />
         </div>
-        <div className="absolute inset-0 -z-10">
+        {/* <div className="absolute inset-0 -z-10">
           <Waves
             lineColor={"rgba(100, 100, 100, 0.2)"}
             backgroundColor="transparent"
@@ -33,11 +34,12 @@ export default function Home() {
             xGap={12}
             yGap={36}
           />
-        </div>
+        </div> */}
         <TimelineDemo />
       </main>
       <footer className="row-start-3 flex gap-6 flex-wrap items-center justify-center">
         <Footerdemo />
+        <Footer7 />
       </footer>
     </div>
   );
