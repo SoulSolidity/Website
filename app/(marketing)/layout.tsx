@@ -65,7 +65,7 @@ export default async function MarketingLayout({
                           "px-4"
                         )}
                       >
-                        Get Started
+                        Contact us
                       </Link>
                     </div>
                   </div>

@@ -62,27 +62,40 @@ export function MainNav() {
     <div className="mr-4 md:flex">
       <Link href="/" className="lg:mr-6 sm:mr-0 flex items-center gap-2">
         <Icons.logo className="h-6 w-6 hidden lg:block md:block" />
-        <span className="font-bold hidden lg:block md:block">QuotesAI</span>
-        <Badge className="hidden lg:block md:block">Beta</Badge>
+        <span className="font-bold hidden lg:block md:block">Soul Solidity</span>
       </Link>
       <NavigationMenu className="hidden lg:block">
         <NavigationMenuList>
           <NavigationMenuItem>
-            <NavigationMenuTrigger className="bg-transparent">Getting started</NavigationMenuTrigger>
+            <NavigationMenuTrigger className="bg-transparent">Products</NavigationMenuTrigger>
             <NavigationMenuContent>
               <ul className="grid gap-1 p-4 md:w-[400px] lg:w-[500px]">
                 <li className="row">
                   <NavigationMenuLink asChild>
                     <a
                       className="flex h-full w-full select-none flex-col justify-end rounded-md bg-gradient-to-b from-muted/50 to-muted p-6 no-underline outline-none focus:shadow-md"
-                      href="/"
+                      href="/zap"
                     >
-                      <Icons.logo className="h-6 w-6" />
-                      <div className="mb-2 mt-4 text-lg font-medium">
-                        QuotesAI
+                      <div className="mb-2 text-lg font-medium">
+                        ⚡ Zap
                       </div>
                       <p className="text-sm leading-tight text-muted-foreground">
-                        Quotes from GOAT 🐐 to make your day and life
+                        Simplify your crypto transactions
+                      </p>
+                    </a>
+                  </NavigationMenuLink>
+                </li>
+                <li className="row">
+                  <NavigationMenuLink asChild>
+                    <a
+                      className="flex h-full w-full select-none flex-col justify-end rounded-md bg-gradient-to-b from-muted/50 to-muted p-6 no-underline outline-none focus:shadow-md"
+                      href="/uptickr"
+                    >
+                      <div className="mb-2 text-lg font-medium">
+                        UpTickr
+                      </div>
+                      <p className="text-sm leading-tight text-muted-foreground">
+                        Building in progress...
                       </p>
                     </a>
                   </NavigationMenuLink>
@@ -99,7 +112,7 @@ export function MainNav() {
               </ul>
             </NavigationMenuContent>
           </NavigationMenuItem>
-          <NavigationMenuItem>
+          {/* <NavigationMenuItem>
             <Link href="/#features" legacyBehavior passHref>
               <NavigationMenuLink className={navigationMenuTriggerStyle()}>
                 Features
@@ -110,7 +123,7 @@ export function MainNav() {
                 Price
               </NavigationMenuLink>
             </Link>
-          </NavigationMenuItem>
+          </NavigationMenuItem> */}
           {/* <NavigationMenuItem>
             <Link href="/pricing" legacyBehavior passHref>
               <NavigationMenuLink className={navigationMenuTriggerStyle()}>
