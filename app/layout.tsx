@@ -16,8 +16,6 @@ import { SiteFooter } from "@/components/site-footer";
 // import PricingPage from "@/app/pricing/page";
 import MobileNav from "@/components/mobile-nav";
 import { Toaster } from "@/components/ui/toaster";
-import { getCurrentUser } from "@/lib/session";
-import { getAuthSession } from "@/lib/auth";
 
 const inter = Inter({ subsets: ["latin"] });
 
