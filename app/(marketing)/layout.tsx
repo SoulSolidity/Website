@@ -13,7 +13,6 @@ import { SiteFooter } from "@/components/site-footer";
 
 import MobileNav from "@/components/mobile-nav";
 import { getCurrentUser } from "@/lib/session";
-import { getAuthSession } from "@/lib/auth";
 import { notFound } from "next/navigation";
 import DashboardLayout from "../(dashboard)/layout";
 import { useRouter } from "next/navigation";
@@ -32,7 +31,6 @@ export default async function MarketingLayout({
   children: React.ReactNode;
 }) {
   const user = await getCurrentUser();
-  const session = await getAuthSession();
 
   const isAuthenticated = !!user;
 
