@@ -2,7 +2,7 @@
 
 import * as React from "react";
 import Link from "next/link";
-
+import { motion, Variants } from "framer-motion";
 import { cn } from "@/lib/utils";
 import { Icons } from "@/components/icons";
 import {
@@ -12,153 +12,213 @@ import {
   NavigationMenuLink,
   NavigationMenuList,
   NavigationMenuTrigger,
-  navigationMenuTriggerStyle,
 } from "@/components/ui/navigation-menu";
-import { Badge } from "./ui/badge";
+import { Button } from "./ui/button";
+import { Sheet, SheetContent, SheetTrigger } from "./ui/sheet";
+import { Menu } from "lucide-react";
+import { ModeToggle } from "./toggle";
 
-
-const components: { title: string; href: string; description: string }[] = [
+const products = [
   {
-    title: "Features",
-    href: "/#features",
-    description:
-      "A modal dialog that interrupts the user with important content and expects a response.",
+    title: "⚡ Zap",
+    href: "/zap",
+    description: "Simplify your crypto transactions with our powerful Zap tool.",
   },
-  // {
-  //   title: "Hover Card",
-  //   href: "/docs/primitives/hover-card",
-  //   description:
-  //     "For sighted users to preview content available behind a link.",
-  // },
-  // {
-  //   title: "Progress",
-  //   href: "/docs/primitives/progress",
-  //   description:
-  //     "Displays an indicator showing the completion progress of a task, typically displayed as a progress bar.",
-  // },
-  // {
-  //   title: "Scroll-area",
-  //   href: "/docs/primitives/scroll-area",
-  //   description: "Visually or semantically separates content.",
-  // },
-  // {
-  //   title: "Tabs",
-  //   href: "/docs/primitives/tabs",
-  //   description:
-  //     "A set of layered sections of content—known as tab panels—that are displayed one at a time.",
-  // },
-  // {
-  //   title: "Tooltip",
-  //   href: "/docs/primitives/tooltip",
-  //   description:
-  //     "A popup that displays information related to an element when the element receives keyboard focus or the mouse hovers over it.",
-  // },
+  {
+    title: "📈 UpTickr",
+    href: "/uptickr",
+    description: "Advanced DeFi analytics and tracking platform (Coming soon).",
+  },
 ];
 
-export function MainNav() {
+const navVariants: Variants = {
+  hidden: { y: -100 },
+  visible: { 
+    y: 0,
+    transition: {
+      duration: 0.5,
+      ease: "easeOut"
+    }
+  }
+};
 
+const itemVariants: Variants = {
+  hidden: { opacity: 0, y: -10 },
+  visible: { 
+    opacity: 1, 
+    y: 0,
+    transition: {
+      duration: 0.2
+    }
+  },
+  hover: { 
+    scale: 1.02,
+    transition: {
+      duration: 0.2
+    }
+  },
+  tap: { 
+    scale: 0.98,
+    transition: {
+      duration: 0.1
+    }
+  }
+};
+
+export function MainNav() {
+  const [isScrolled, setIsScrolled] = React.useState(false);
+
+  React.useEffect(() => {
+    const handleScroll = () => {
+      setIsScrolled(window.scrollY > 10);
+    };
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
 
   return (
-    <div className="mr-4 md:flex">
-      <Link href="/" className="lg:mr-6 sm:mr-0 flex items-center gap-2">
-        <Icons.logo className="h-6 w-6 hidden lg:block md:block" />
-        <span className="font-bold hidden lg:block md:block">Soul Solidity</span>
-      </Link>
-      <NavigationMenu className="hidden lg:block">
-        <NavigationMenuList>
-          <NavigationMenuItem>
-            <NavigationMenuTrigger className="bg-transparent">Products</NavigationMenuTrigger>
-            <NavigationMenuContent>
-              <ul className="grid gap-1 p-4 md:w-[400px] lg:w-[500px]">
-                <li className="row">
-                  <NavigationMenuLink asChild>
-                    <a
-                      className="flex h-full w-full select-none flex-col justify-end rounded-md bg-gradient-to-b from-muted/50 to-muted p-6 no-underline outline-none focus:shadow-md"
-                      href="/zap"
-                    >
-                      <div className="mb-2 text-lg font-medium">
-                        ⚡ Zap
-                      </div>
-                      <p className="text-sm leading-tight text-muted-foreground">
-                        Simplify your crypto transactions
-                      </p>
-                    </a>
+    <motion.header
+      variants={navVariants}
+      initial="hidden"
+      animate="visible"
+      className={cn(
+        "fixed top-0 left-0 right-0 z-50 border-b transition-all duration-200",
+        isScrolled
+          ? "bg-background/80 backdrop-blur-lg shadow-sm"
+          : "bg-transparent border-transparent"
+      )}
+    >
+      <div className="container flex h-16 items-center justify-between">
+        <div className="flex items-center gap-6">
+          <Link href="/" className="flex items-center gap-2 transition-opacity hover:opacity-80">
+            <Icons.logo className="h-6 w-6" />
+            <span className="font-bold hidden sm:block">Soul Solidity</span>
+          </Link>
+
+          <NavigationMenu className="hidden md:block">
+            <NavigationMenuList>
+              <NavigationMenuItem>
+                <NavigationMenuTrigger 
+                  className={cn(
+                    "bg-transparent",
+                    isScrolled ? "" : "text-foreground"
+                  )}
+                >
+                  Products
+                </NavigationMenuTrigger>
+                <NavigationMenuContent>
+                  <ul className="grid w-[400px] gap-3 p-4 md:w-[500px] md:grid-cols-2">
+                    {products.map((product) => (
+                      <motion.li
+                        key={product.title}
+                        variants={itemVariants}
+                        initial="hidden"
+                        animate="visible"
+                        whileHover="hover"
+                        whileTap="tap"
+                      >
+                        <NavigationMenuLink asChild>
+                          <a
+                            href={product.href}
+                            className="block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground"
+                          >
+                            <div className="text-sm font-medium leading-none">{product.title}</div>
+                            <p className="line-clamp-2 text-sm leading-snug text-muted-foreground">
+                              {product.description}
+                            </p>
+                          </a>
+                        </NavigationMenuLink>
+                      </motion.li>
+                    ))}
+                  </ul>
+                </NavigationMenuContent>
+              </NavigationMenuItem>
+              <NavigationMenuItem>
+                <Link href="/#features" legacyBehavior passHref>
+                  <NavigationMenuLink 
+                    className={cn(
+                      "group inline-flex h-10 w-max items-center justify-center rounded-md bg-transparent px-4 py-2 text-sm font-medium transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground focus:outline-none disabled:pointer-events-none disabled:opacity-50",
+                      isScrolled ? "" : "text-foreground"
+                    )}
+                  >
+                    Features
                   </NavigationMenuLink>
-                </li>
-                <li className="row">
-                  <NavigationMenuLink asChild>
-                    <a
-                      className="flex h-full w-full select-none flex-col justify-end rounded-md bg-gradient-to-b from-muted/50 to-muted p-6 no-underline outline-none focus:shadow-md"
-                      href="/uptickr"
+                </Link>
+              </NavigationMenuItem>
+            </NavigationMenuList>
+          </NavigationMenu>
+        </div>
+
+        <div className="flex items-center gap-4">
+          <ModeToggle />
+          <motion.div
+            variants={itemVariants}
+            initial="hidden"
+            animate="visible"
+            whileHover="hover"
+            whileTap="tap"
+          >
+            <Button
+              asChild
+              variant="outline"
+              size="sm"
+              className="hidden md:inline-flex"
+            >
+              <Link href="/#contact">Contact Us</Link>
+            </Button>
+          </motion.div>
+
+          <Sheet>
+            <SheetTrigger asChild>
+              <Button
+                variant="ghost"
+                size="icon"
+                className="md:hidden"
+              >
+                <Menu className="h-5 w-5" />
+              </Button>
+            </SheetTrigger>
+            <SheetContent side="right" className="w-[300px] sm:w-[400px]">
+              <nav className="flex flex-col gap-4">
+                <Link
+                  href="/"
+                  className="flex items-center gap-2 py-2"
+                >
+                  <Icons.logo className="h-6 w-6" />
+                  <span className="font-bold">Soul Solidity</span>
+                </Link>
+                <div className="flex flex-col gap-2">
+                  <h4 className="font-medium">Products</h4>
+                  {products.map((product) => (
+                    <Link
+                      key={product.title}
+                      href={product.href}
+                      className="text-muted-foreground hover:text-foreground transition-colors py-2"
                     >
-                      <div className="mb-2 text-lg font-medium">
-                        UpTickr
-                      </div>
-                      <p className="text-sm leading-tight text-muted-foreground">
-                        Building in progress...
-                      </p>
-                    </a>
-                  </NavigationMenuLink>
-                </li>
-                {/* <ListItem href="/docs" title="Introduction">
-                  Re-usable components built using Radix UI and Tailwind CSS.
-                </ListItem>
-                <ListItem href="/docs/installation" title="Installation">
-                  How to install dependencies and structure your app.
-                </ListItem>
-                <ListItem href="/docs/primitives/typography" title="Typography">
-                  Styles for headings, paragraphs, lists...etc
-                </ListItem> */}
-              </ul>
-            </NavigationMenuContent>
-          </NavigationMenuItem>
-          {/* <NavigationMenuItem>
-            <Link href="/#features" legacyBehavior passHref>
-              <NavigationMenuLink className={navigationMenuTriggerStyle()}>
-                Features
-              </NavigationMenuLink>
-            </Link>
-            <Link href="/pricing" legacyBehavior passHref>
-              <NavigationMenuLink className={navigationMenuTriggerStyle()}>
-                Price
-              </NavigationMenuLink>
-            </Link>
-          </NavigationMenuItem> */}
-          {/* <NavigationMenuItem>
-            <Link href="/pricing" legacyBehavior passHref>
-              <NavigationMenuLink className={navigationMenuTriggerStyle()}>
-                Pricing
-              </NavigationMenuLink>
-            </Link>
-          </NavigationMenuItem> */}
-        </NavigationMenuList>
-      </NavigationMenu>
-    </div>
+                      {product.title}
+                    </Link>
+                  ))}
+                </div>
+                <Link
+                  href="/#features"
+                  className="text-muted-foreground hover:text-foreground transition-colors py-2"
+                >
+                  Features
+                </Link>
+                <Link
+                  href="/#contact"
+                  className="text-muted-foreground hover:text-foreground transition-colors py-2"
+                >
+                  Contact
+                </Link>
+                <div className="pt-4">
+                  <ModeToggle />
+                </div>
+              </nav>
+            </SheetContent>
+          </Sheet>
+        </div>
+      </div>
+    </motion.header>
   );
 }
-
-const ListItem = React.forwardRef<
-  React.ElementRef<"a">,
-  React.ComponentPropsWithoutRef<"a">
->(({ className, title, children, ...props }, ref) => {
-  return (
-    <li>
-      <NavigationMenuLink asChild>
-        <a
-          ref={ref}
-          className={cn(
-            "block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground",
-            className
-          )}
-          {...props}
-        >
-          <div className="text-sm font-medium leading-none">{title}</div>
-          <p className="line-clamp-2 text-sm leading-snug text-muted-foreground">
-            {children}
-          </p>
-        </a>
-      </NavigationMenuLink>
-    </li>
-  );
-});
-ListItem.displayName = "ListItem";
