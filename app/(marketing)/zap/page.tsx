@@ -58,7 +58,7 @@ class SpeedZap {
         }
     }
 
-    update() {
+    update(isHovering: boolean) {
         if (isHovering) {
             this.progress = Math.min(1, this.progress + 0.1);
         } else {
@@ -132,7 +132,7 @@ const SpeedZaps = ({ isHovering }: { isHovering: boolean }) => {
             ctx.clearRect(0, 0, canvas.width, canvas.height);
             
             speedZaps.forEach(zap => {
-                zap.update();
+                zap.update(isHovering);
                 zap.draw(ctx);
             });
 
