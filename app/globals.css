@@ -113,6 +113,32 @@
       --input: 240 5.9% 90%;
       --ring: 142 76.2% 36.3%;
     }
+
+    /* Vertical Writing for Matrix Effect */
+    .writing-vertical {
+      writing-mode: vertical-rl;
+      text-orientation: mixed;
+    }
+
+    /* Enhanced Glow Effects */
+    .glow-effect {
+      box-shadow: 0 0 10px theme('colors.primary.DEFAULT'),
+                  0 0 20px theme('colors.primary.DEFAULT'),
+                  0 0 30px theme('colors.primary.DEFAULT');
+    }
+
+    .text-glow {
+      text-shadow: 0 0 10px theme('colors.primary.DEFAULT'),
+                   0 0 20px theme('colors.primary.DEFAULT');
+    }
+
+    /* Cyberpunk-style Grid */
+    .cyber-grid {
+      background-image: 
+        linear-gradient(to right, theme('colors.primary.DEFAULT / 0.1') 1px, transparent 1px),
+        linear-gradient(to bottom, theme('colors.primary.DEFAULT / 0.1') 1px, transparent 1px);
+      background-size: 20px 20px;
+    }
   }
   
 

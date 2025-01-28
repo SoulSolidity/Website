@@ -11,6 +11,7 @@ import React from "react";
 import Stats from "@/app/(marketing)/hero/stats";
 import { motion, AnimatePresence, Variants } from "framer-motion";
 import ShineBorder from "@/components/magicui/shine-border";
+import HackerBackground from "@/app/(marketing)/components/HackerBackground";
 
 const fadeInUp: Variants = {
   hidden: { opacity: 0, y: 20 },
@@ -34,29 +35,7 @@ function HeroPage() {
   return (
     <>
       <section className="relative min-h-screen flex items-center overflow-hidden">
-        {/* Matrix-like raining code effect */}
-        <div className="absolute inset-0">
-          {[...Array(20)].map((_, i) => (
-            <motion.div
-              key={i}
-              className="absolute h-full w-[1px] bg-gradient-to-b from-transparent via-primary/40 to-transparent"
-              style={{
-                left: `${(i + 1) * (100 / 20)}%`,
-                opacity: 0,
-              }}
-              animate={{
-                opacity: [0, 0.5, 0],
-                y: [-1000, 1000],
-              }}
-              transition={{
-                duration: Math.random() * 3 + 2,
-                repeat: Infinity,
-                delay: Math.random() * 2,
-                ease: "linear",
-              }}
-            />
-          ))}
-        </div>
+        <HackerBackground />
 
         <div className="space-y-6 py-24 md:py-32 w-full relative">
           <div className="container flex max-w-[68rem] flex-col items-center gap-6 text-center z-10">
