@@ -1,27 +1,54 @@
 import { MainNav } from "@/components/main-nav";
-// import { MobileNav } from "@/components/mobile-nav";
 import { cn } from "@/lib/utils";
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
 import { SpeedInsights } from '@vercel/speed-insights/next';
 import { Analytics } from '@vercel/analytics/react';
 import "./globals.css";
 import { fontSans } from "@/lib/fonts";
-import Link from "@/node_modules/next/link";
-import { buttonVariants } from "@/components/ui/button";
 import { ThemeProvider } from "@/components/theme-provider";
-import { ModeToggle } from "@/components/toggle";
-// import HeroPage from "./hero/page";
 import { SiteFooter } from "@/components/site-footer";
-// import PricingPage from "@/app/pricing/page";
-import MobileNav from "@/components/mobile-nav";
 import { Toaster } from "@/components/ui/toaster";
 
-const inter = Inter({ subsets: ["latin"] });
-
 export const metadata: Metadata = {
-  title: "Quote AI",
-  description: "Generate Daily Quotes",
+  metadataBase: new URL(process.env.NEXT_PUBLIC_APP_URL || 'https://soulsolidity.com'),
+  title: "Soul Solidity | DeFi Development Lab",
+  description: "We are a developer lab with a passion for Solidity, dedicated to building simple, secure, and robust decentralized systems.",
+  keywords: [
+    "Solidity",
+    "DeFi",
+    "Blockchain",
+    "Smart Contracts",
+    "Web3",
+    "Ethereum",
+    "Development",
+  ],
+  authors: [
+    {
+      name: "Soul Solidity",
+      url: "https://soulsolidity.com",
+    },
+  ],
+  creator: "Soul Solidity",
+  openGraph: {
+    type: "website",
+    locale: "en_US",
+    url: "https://soulsolidity.com",
+    title: "Soul Solidity | DeFi Development Lab",
+    description: "Building secure and innovative DeFi solutions",
+    siteName: "Soul Solidity",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Soul Solidity | DeFi Development Lab",
+    description: "Building secure and innovative DeFi solutions",
+    creator: "@soulsolidity",
+  },
+  icons: {
+    icon: "/favicon.ico",
+    shortcut: "/favicon-16x16.png",
+    apple: "/apple-touch-icon.png",
+  },
+  manifest: "/site.webmanifest",
 };
 
 export default function RootLayout({
@@ -30,10 +57,20 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" suppressHydrationWarning>
+    <html lang="en" suppressHydrationWarning className="!scroll-smooth">
+      <head>
+        <link
+          rel="preload"
+          href="/fonts/inter-var.woff2"
+          as="font"
+          type="font/woff2"
+          crossOrigin="anonymous"
+        />
+      </head>
       <body
         className={cn(
-          "relative flex min-h-screen w-full flex-col justify-center scroll-smooth bg-background font-sans antialiased",
+          "min-h-screen bg-background font-sans antialiased",
+          fontSans.variable
         )}
       >
         <ThemeProvider
@@ -42,39 +79,15 @@ export default function RootLayout({
           enableSystem
           disableTransitionOnChange
         >
-          {/* <div className="flex min-h-screen flex-col">
-            <header className="h-16 container sticky top-0 z-50 w-full border-b border-border/40 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
-              <div className="flex h-16 items-center justify-between py-6 w-full">
-              <MobileNav />
-                <MainNav />
-                <nav>
-                  <div className="md:flex">
-                    <div className="flex gap-4">
-                      <ModeToggle />
-                      <Link
-                        href="/login"
-                        className={cn(
-                          buttonVariants({ variant: "secondary", size: "sm" }),
-                          "px-4"
-                        )}
-                      >
-                        Get Started
-                      </Link>
-                    </div>
-                  </div>
-                </nav>
-              </div>
-            </header> */}
-          {/* <HeroPage /> */}
-
-          <main className="flex-1">{children}</main>
-          <Analytics />
-          <SpeedInsights />
-          {/* </div>
-           
-          <SiteFooter /> */}
+          <div className="relative flex min-h-screen flex-col">
+            <MainNav />
+            <main className="flex-1">{children}</main>
+            <SiteFooter />
+          </div>
           <Toaster />
         </ThemeProvider>
+        <Analytics />
+        <SpeedInsights />
       </body>
     </html>
   );
