@@ -25,15 +25,25 @@ const products = [
     description: "Simplify your crypto transactions with our powerful Zap tool.",
   },
   {
+    title: "💰 Pricing",
+    href: "/pricing",
+    description: "Get real-time price data from multiple DEXs across different chains",
+  },
+  {
     title: "📈 UpTickr",
     href: "/uptickr",
     description: "Advanced DeFi analytics and tracking platform (Coming soon).",
+  },
+  {
+    title: "🛠️ Custom Software",
+    href: "/custom",
+    description: "Tailored blockchain solutions and smart contract development for your specific needs.",
   },
 ];
 
 const navVariants: Variants = {
   hidden: { y: -100 },
-  visible: { 
+  visible: {
     y: 0,
     transition: {
       duration: 0.5,
@@ -44,20 +54,20 @@ const navVariants: Variants = {
 
 const itemVariants: Variants = {
   hidden: { opacity: 0, y: -10 },
-  visible: { 
-    opacity: 1, 
+  visible: {
+    opacity: 1,
     y: 0,
     transition: {
       duration: 0.2
     }
   },
-  hover: { 
+  hover: {
     scale: 1.02,
     transition: {
       duration: 0.2
     }
   },
-  tap: { 
+  tap: {
     scale: 0.98,
     transition: {
       duration: 0.1
@@ -98,7 +108,7 @@ export function MainNav() {
           <NavigationMenu className="hidden md:block">
             <NavigationMenuList>
               <NavigationMenuItem>
-                <NavigationMenuTrigger 
+                <NavigationMenuTrigger
                   className={cn(
                     "bg-transparent",
                     isScrolled ? "" : "text-foreground"
@@ -107,13 +117,12 @@ export function MainNav() {
                   Products
                 </NavigationMenuTrigger>
                 <NavigationMenuContent>
-                  <ul className="grid w-[400px] gap-3 p-4 md:w-[500px] md:grid-cols-2">
+                  <ul className="grid w-[400px] gap-3 p-4">
                     {products.map((product) => (
                       <motion.li
                         key={product.title}
                         variants={itemVariants}
-                        initial="hidden"
-                        animate="visible"
+                        initial="visible"
                         whileHover="hover"
                         whileTap="tap"
                       >
@@ -134,14 +143,14 @@ export function MainNav() {
                 </NavigationMenuContent>
               </NavigationMenuItem>
               <NavigationMenuItem>
-                <Link href="/#features" legacyBehavior passHref>
-                  <NavigationMenuLink 
+                <Link href="/#about" legacyBehavior passHref>
+                  <NavigationMenuLink
                     className={cn(
                       "group inline-flex h-10 w-max items-center justify-center rounded-md bg-transparent px-4 py-2 text-sm font-medium transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground focus:outline-none disabled:pointer-events-none disabled:opacity-50",
                       isScrolled ? "" : "text-foreground"
                     )}
                   >
-                    Features
+                    About
                   </NavigationMenuLink>
                 </Link>
               </NavigationMenuItem>

@@ -243,12 +243,12 @@ const DexCard: React.FC<{ name: string; className?: string }> = ({ name, classNa
 );
 
 // Lazy load components for better performance
-const HeroSection = lazy(() => import("@/app/routes/pricing/components/hero-section"));
-const SupportedDexesSection = lazy(() => import("@/app/routes/pricing/components/supported-dexes-section"));
-const SupportedChainsSection = lazy(() => import("@/app/routes/pricing/components/supported-chains-section"));
-const ComparisonSection = lazy(() => import("@/app/routes/pricing/components/comparison-section"));
-const PlaygroundSection = lazy(() => import("@/app/routes/pricing/components/playground-section"));
-const CTASection = lazy(() => import("@/app/routes/pricing/components/cta-section"));
+const HeroSection = lazy(() => import("@/app/pricing/components/hero-section"));
+const SupportedDexesSection = lazy(() => import("@/app/pricing/components/supported-dexes-section"));
+const SupportedChainsSection = lazy(() => import("@/app/pricing/components/supported-chains-section"));
+const ComparisonSection = lazy(() => import("@/app/pricing/components/comparison-section"));
+const PlaygroundSection = lazy(() => import("@/app/pricing/components/playground-section"));
+const CTASection = lazy(() => import("@/app/pricing/components/cta-section"));
 
 // Loading fallback component
 const SectionSkeleton = () => (

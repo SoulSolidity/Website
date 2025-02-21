@@ -63,7 +63,7 @@ const config = {
   					height: '0'
   				}
   			},
-  			meteor: {
+  			'meteor': {
   				'0%': {
   					transform: 'rotate(215deg) translateX(0)',
   					opacity: '1'
@@ -76,21 +76,26 @@ const config = {
   					opacity: '0'
   				}
   			},
-  			shimmer: {
+  			'shimmer': {
   				'100%': {
   					transform: 'translateX(100%)'
   				}
   			},
-        'gradient-xy': {
-          '0%, 100%': {
-            'background-size': '400% 400%',
-            'background-position': 'left center'
-          },
-          '50%': {
-            'background-size': '200% 200%',
-            'background-position': 'right center'
-          }
-        }
+  			'gradient': {
+  				'0%, 100%': { 'background-position': '0% 50%' },
+  				'50%': { 'background-position': '100% 50%' },
+  			},
+  			'gradient-xy': {
+  				'0%, 100%': {
+  					'background-size': '400% 400%',
+  					'background-position': 'left center'
+  				},
+  				'50%': {
+  					'background-size': '200% 200%',
+  					'background-position': 'right center'
+  				}
+  			},
+  			'pulse': 'pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite',
   		},
   		colors: {
   			border: 'hsl(var(--border))',
@@ -144,8 +149,10 @@ const config = {
   			'accordion-up': 'accordion-up 0.2s ease-out',
   			'meteor-effect': 'meteor 5s linear infinite',
   			'border-beam': 'border-beam calc(var(--duration)*1s) infinite linear',
-  			shimmer: 'shimmer 2s linear infinite',
-        'gradient-xy': 'gradient-xy 15s ease infinite'
+  			'shimmer': 'shimmer 2s linear infinite',
+  			'gradient': 'gradient 3s linear infinite',
+  			'gradient-xy': 'gradient-xy 15s ease infinite',
+  			'pulse': 'pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite',
   		},
   		backgroundImage: {
   			'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',

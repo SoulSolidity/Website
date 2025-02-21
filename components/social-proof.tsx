@@ -4,35 +4,28 @@ import { motion, Variants } from "framer-motion";
 
 const companies = [
   {
-    name: "Ethereum",
-    logo: "/logos/ethereum.svg",
-    description: "Leading Smart Contract Platform"
+    name: "ApeBond",
+    logo: "https://raw.githubusercontent.com/SoulSolidity/registry/refs/heads/main/src/assets/projects/ApeBond.jpg",
+    description: "On-Chain OTC Marketplace",
+    website: "https://ape.bond"
   },
   {
-    name: "Polygon",
-    logo: "/logos/polygon.svg",
-    description: "Layer 2 Scaling Solution"
+    name: "Lynex",
+    logo: "https://raw.githubusercontent.com/SoulSolidity/registry/refs/heads/main/src/assets/projects/Lynex.jpg",
+    description: "The Native Liquidity Engine and ALM marketplace of Linea",
+    website: "https://lynex.fi"
   },
   {
-    name: "Arbitrum",
-    logo: "/logos/arbitrum.svg",
-    description: "Optimistic Rollup Solution"
+    name: "Ocelex",
+    logo: "https://raw.githubusercontent.com/SoulSolidity/registry/refs/heads/main/src/assets/projects/Ocelex.svg",
+    description: "The Native Liquidity Engine and ALM marketplace of Zircuit",
+    website: "https://ocelex.fi"
   },
-  {
-    name: "Avalanche",
-    logo: "/logos/avalanche.svg",
-    description: "High-Performance Blockchain"
-  },
-  {
-    name: "Binance",
-    logo: "/logos/binance.svg",
-    description: "Leading Crypto Exchange"
-  }
 ];
 
 const fadeIn: Variants = {
   hidden: { opacity: 0 },
-  visible: { 
+  visible: {
     opacity: 1,
     transition: { duration: 0.5 }
   }
@@ -40,8 +33,8 @@ const fadeIn: Variants = {
 
 const fadeInUpDelayed = (delay: number): Variants => ({
   hidden: { opacity: 0, y: 20 },
-  visible: { 
-    opacity: 1, 
+  visible: {
+    opacity: 1,
     y: 0,
     transition: { duration: 0.5, delay }
   }
@@ -66,47 +59,44 @@ export function Companies() {
           </p>
         </motion.div>
 
-        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-8 items-center justify-center">
-          {companies.map((company, idx) => (
-            <motion.div
-              key={idx}
-              initial="hidden"
-              whileInView="visible"
-              viewport={{ once: true }}
-              variants={fadeInUpDelayed(0.1 + idx * 0.1)}
-              className="group relative"
-            >
-              <div className="absolute inset-0 bg-gradient-to-b from-background to-background/80 rounded-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-              <div className="relative p-6 text-center rounded-lg border bg-background/50 backdrop-blur-sm hover:border-primary/50 transition-colors duration-300">
-                <div className="h-12 flex items-center justify-center mb-4">
-                  <img
-                    src={company.logo}
-                    alt={company.name}
-                    className="h-8 w-auto object-contain dark:brightness-0 dark:invert transition-transform duration-300 group-hover:scale-110"
-                  />
-                </div>
-                <div className="space-y-2">
-                  <h3 className="font-medium text-sm">{company.name}</h3>
-                  <p className="text-xs text-muted-foreground">
-                    {company.description}
-                  </p>
-                </div>
-              </div>
-            </motion.div>
-          ))}
+        <div className="max-w-4xl mx-auto">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 items-center justify-items-center">
+            {companies.map((company, idx) => (
+              <motion.div
+                key={idx}
+                initial="hidden"
+                whileInView="visible"
+                viewport={{ once: true }}
+                variants={fadeInUpDelayed(0.1 + idx * 0.1)}
+                className="group relative w-full max-w-[280px]"
+              >
+                <a
+                  href={company.website}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="block h-full"
+                >
+                  <div className="absolute inset-0 bg-gradient-to-b from-background to-background/80 rounded-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                  <div className="relative p-6 text-center rounded-lg border bg-background/50 backdrop-blur-sm hover:border-primary/50 transition-colors duration-300 h-full flex flex-col">
+                    <div className="h-24 flex items-center justify-center mb-4">
+                      <img
+                        src={company.logo}
+                        alt={company.name}
+                        className="h-20 w-20 object-cover rounded-full transition-transform duration-300 group-hover:scale-110"
+                      />
+                    </div>
+                    <div className="space-y-2 flex-1 flex flex-col justify-center min-h-[60px]">
+                      <h3 className="font-medium text-sm">{company.name}</h3>
+                      <p className="text-xs text-muted-foreground">
+                        {company.description}
+                      </p>
+                    </div>
+                  </div>
+                </a>
+              </motion.div>
+            ))}
+          </div>
         </div>
-
-        <motion.div
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true }}
-          variants={fadeIn}
-          className="mt-16 text-center"
-        >
-          <p className="text-sm text-muted-foreground">
-            And many more blockchain platforms trust our solutions
-          </p>
-        </motion.div>
       </div>
     </section>
   );
