@@ -4,7 +4,7 @@ import type { Metadata } from "next";
 import { SpeedInsights } from '@vercel/speed-insights/next';
 import { Analytics } from '@vercel/analytics/react';
 import "./globals.css";
-import { fontSans } from "@/lib/fonts";
+import { fontSans, fontMono } from "@/lib/fonts";
 import { ThemeProvider } from "@/components/theme-provider";
 import { SiteFooter } from "@/components/site-footer";
 import { Toaster } from "@/components/ui/toaster";
@@ -58,19 +58,11 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" suppressHydrationWarning className="!scroll-smooth">
-      <head>
-        <link
-          rel="preload"
-          href="/fonts/inter-var.woff2"
-          as="font"
-          type="font/woff2"
-          crossOrigin="anonymous"
-        />
-      </head>
       <body
         className={cn(
           "min-h-screen bg-background font-sans antialiased",
-          fontSans.variable
+          fontSans.variable,
+          fontMono.variable
         )}
       >
         <ThemeProvider

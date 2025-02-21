@@ -1,0 +1,42 @@
+---
+description: General Rules for all typescript files and tasks
+globs: *ts, *tsx
+---
+### TypeScript Best Practices
+
+1. **Use Explicit Type Annotations**: Clearly specify types for variables, function parameters, and return values to enhance code clarity and maintainability.
+
+2. **Avoid the `any` Type**: Refrain from using `any` as it bypasses type safety. Instead, use specific types or generics to maintain type integrity.
+
+3. **Prefer `unknown` Over `any`**: When the type of a variable is not known, use `unknown` instead of `any`. This requires explicit type checking before performing operations, enhancing type safety.
+
+4. **Define Function Return Types**: Always specify the return type of functions. This practice improves readability and helps catch potential issues during development.
+
+5. **Utilize Interfaces and Type Aliases**: Use interfaces to define the structure of objects and type aliases for complex type definitions. This promotes code clarity and reusability.
+
+6. **Leverage Type Inference**: Allow TypeScript to infer types when appropriate, reducing redundancy and keeping the code clean. However, be explicit when it enhances understanding.
+
+7. **Use Union and Intersection Types Wisely**: Employ union (`|`) and intersection (`&`) types to create flexible and precise type definitions, enhancing code robustness.
+
+8. **Implement Readonly Properties**: Use the `readonly` modifier to prevent unintended mutations of objects and arrays, ensuring data immutability.
+
+9. **Employ Utility Types**: Utilize TypeScript's built-in utility types like `Partial`, `Pick`, `Omit`, and `Readonly` to transform types efficiently and reduce boilerplate code.
+
+10. **Handle Null and Undefined Safely**: Use optional chaining (`?.`) and nullish coalescing (`??`) operators to manage `null` and `undefined` values gracefully.
+
+11. **Use Enums for Related Constants**: Define enums to represent a set of related constants, improving code readability and maintainability.
+
+12. **Write Small, Single-Responsibility Functions**: Design functions that perform a single task, enhancing readability, testability, and maintainability.
+
+13. **Document Your Code**: Provide clear documentation using comments and JSDoc annotations to explain complex logic and improve code comprehensibility.
+
+14. **Organize Code with Modules and Namespaces**: Structure your code using modules and namespaces to encapsulate related functionalities and prevent naming collisions.
+
+15. **Avoid Type Assertions**: Minimize the use of type assertions (`as`) as they can lead to runtime errors if misused. Instead, perform proper type checks to ensure type safety.
+
+16. **Refrain from Using `@ts-ignore`**: Avoid using `@ts-ignore` to bypass TypeScript errors, as it can mask underlying issues. Address the root cause of the errors instead.
+
+17. **Use Generics for Reusable Components**: Implement generics to create reusable and type-safe components, functions, and classes that can work with various data types.
+
+By adhering to these best practices, you can write TypeScript code that is robust, maintainable, and efficient, leading to a more productive development experience.
+

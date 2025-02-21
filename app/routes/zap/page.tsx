@@ -338,72 +338,67 @@ const BackgroundLightning = () => {
 function ZapPage() {
     return (
         <>
-            <section className="relative min-h-screen flex items-center overflow-hidden bg-gradient-to-b from-background via-background to-background">
-                <div className="absolute inset-0 z-0">
-                    <BackgroundLightning />
-                </div>
-                <div className="space-y-6 py-24 md:py-32 w-full relative z-10">
-                    <div className="container flex max-w-[68rem] flex-col items-center gap-6 text-center">
-                        <motion.h1
+            <section className="relative min-h-[85vh] flex items-center overflow-hidden">
+                <BackgroundLightning />
+                
+                <div className="space-y-8 py-32 md:py-40 w-full relative">
+                    <div className="container flex max-w-[64rem] flex-col items-center gap-12 text-center">
+                        <motion.div
                             initial="hidden"
                             animate="visible"
                             variants={fadeInUpDelayed(0.2)}
-                            className="font-heading text-4xl sm:text-5xl md:text-6xl lg:text-7xl relative"
+                            className="space-y-6"
                         >
-                            <motion.span 
-                                className="block mb-4"
-                                whileHover={{ scale: 1.02 }}
-                                transition={{ type: "spring", stiffness: 300 }}
-                            >
-                                Simplify Your
-                            </motion.span>{" "}
-                            <motion.span 
-                                className="text-yellow-400 relative inline-block"
-                                whileHover={{ scale: 1.05 }}
-                                transition={{ type: "spring", stiffness: 300 }}
-                            >
-                                Crypto Transactions
-                                <div className="absolute -inset-x-4 -inset-y-2 bg-yellow-400/10 blur-2xl rounded-lg -z-10 animate-pulse" />
-                                <div className="absolute -inset-x-4 -inset-y-2 bg-yellow-400/5 rounded-lg -z-10" />
-                            </motion.span>
-                        </motion.h1>
-
-                        <motion.p
-                            initial="hidden"
-                            animate="visible"
-                            variants={fadeInUpDelayed(0.4)}
-                            className="max-w-[42rem] leading-relaxed text-muted-foreground sm:text-xl sm:leading-8"
-                            whileHover={{ scale: 1.02 }}
-                            transition={{ type: "spring", stiffness: 200 }}
-                        >
-                            Enhance user experience with our zap solution. Consolidate multiple transactions into one, 
-                            reduce the number of clicks, and keep your users coming back for more with a smoother, faster process.
-                        </motion.p>
+                            <h1 className="font-heading text-4xl sm:text-5xl md:text-6xl lg:text-7xl">
+                                <motion.span
+                                    className="block mb-4"
+                                    whileHover={{ scale: 1.02 }}
+                                    transition={{ type: "spring", stiffness: 300 }}
+                                >
+                                    Lightning Fast
+                                </motion.span>{" "}
+                                <motion.span
+                                    className="text-primary relative inline-block"
+                                    whileHover={{ scale: 1.05 }}
+                                    transition={{ type: "spring", stiffness: 300 }}
+                                >
+                                    Token Swaps
+                                    <div className="absolute -inset-x-4 -inset-y-2 bg-primary/10 blur-2xl rounded-lg -z-10 animate-pulse" />
+                                    <div className="absolute -inset-x-4 -inset-y-2 bg-primary/5 rounded-lg -z-10" />
+                                </motion.span>
+                            </h1>
+                            <p className="max-w-[42rem] leading-relaxed text-muted-foreground sm:text-xl sm:leading-8">
+                                Experience seamless token swaps with our high-performance DEX aggregator.
+                                Built for speed, security, and the best possible rates.
+                            </p>
+                        </motion.div>
 
                         <motion.div
                             initial="hidden"
                             animate="visible"
-                            variants={fadeInUpDelayed(0.6)}
+                            variants={fadeInUpDelayed(0.4)}
                             className="flex flex-col sm:flex-row gap-4 sm:gap-6"
                         >
-                            <Button asChild size="lg" className="group relative overflow-hidden hover:scale-105 transition-transform bg-yellow-500 hover:bg-yellow-600">
-                                <Link href="/#contact">
-                                    <motion.span 
-                                        className="relative z-10 flex items-center gap-2"
-                                        whileTap={{ scale: 0.95 }}
-                                    >
-                                        Contact us <Zap className="w-4 h-4" />
-                                    </motion.span>
-                                </Link>
-                            </Button>
-                            <Button asChild size="lg" variant="outline" className="group relative overflow-hidden hover:scale-105 transition-transform border-yellow-500/50 hover:border-yellow-500">
-                                <Link href="/#products">
-                                    <motion.span 
+                            <Button asChild size="lg" className="group relative overflow-hidden hover:scale-105 transition-transform">
+                                <Link href="/docs/zap">
+                                    <motion.span
                                         className="relative z-10"
                                         whileTap={{ scale: 0.95 }}
                                     >
-                                        Learn more
+                                        View Documentation
                                     </motion.span>
+                                    <div className="absolute inset-0 bg-gradient-to-r from-primary/80 to-primary opacity-0 group-hover:opacity-100 transition-opacity" />
+                                </Link>
+                            </Button>
+                            <Button 
+                                asChild 
+                                variant="outline" 
+                                size="lg"
+                                className="group hover:scale-105 transition-transform"
+                            >
+                                <Link href="#demo">
+                                    Try Demo
+                                    <Zap className="ml-2 h-4 w-4" />
                                 </Link>
                             </Button>
                         </motion.div>
@@ -412,23 +407,24 @@ function ZapPage() {
                             initial={{ opacity: 0, scale: 0.95 }}
                             animate={{ opacity: 1, scale: 1 }}
                             transition={{ duration: 0.5, delay: 0.8 }}
-                            className="w-full max-w-[58rem] rounded-lg border bg-card/50 backdrop-blur-sm p-4 mt-12 hover:border-yellow-500/50 transition-colors duration-300"
+                            className="w-full max-w-[58rem] rounded-lg border bg-background/50 backdrop-blur-sm p-8 mt-12 hover:border-primary/50 transition-colors duration-300"
                             whileHover={{ scale: 1.02 }}
                         >
-                            <div className="grid grid-cols-2 md:grid-cols-3 gap-4 text-center">
+                            <div className="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
                                 {[
-                                    { label: "Transactions Combined", value: "1000+" },
-                                    { label: "Gas Saved", value: "50%" },
-                                    { label: "User Satisfaction", value: "100%" },
+                                    { label: "Total Volume", value: "$100M+" },
+                                    { label: "Supported DEXs", value: "10+" },
+                                    { label: "Chains", value: "15+" },
+                                    { label: "Daily Users", value: "1000+" },
                                 ].map((stat, i) => (
                                     <motion.div 
-                                        key={i} 
-                                        className="space-y-1"
+                                        key={i}
+                                        className="space-y-2"
                                         whileHover={{ scale: 1.05 }}
                                         transition={{ type: "spring", stiffness: 300 }}
                                     >
                                         <motion.h4 
-                                            className="text-2xl font-bold text-yellow-400"
+                                            className="text-2xl font-bold"
                                             initial={{ opacity: 0, y: 20 }}
                                             animate={{ opacity: 1, y: 0 }}
                                             transition={{ delay: 0.8 + (i * 0.1) }}

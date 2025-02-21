@@ -1,26 +1,8 @@
 import React, { useEffect, useRef } from 'react'
 import { useTheme } from 'next-themes'
 
-const CODE_SNIPPETS = [
-  'pragma solidity ^0.8.0;',
-  'contract ERC20 {',
-  'function transfer()',
-  'mapping(address => uint)',
-  'uint256 public totalSupply;',
-  'address payable owner;',
-  'struct Stake {',
-  'event Transfer(address,address)',
-  'modifier onlyOwner() {',
-  'require(msg.sender == owner);',
-  'assert(balance >= amount);',
-  'revert("Insufficient funds");',
-  'emit Transfer(msg.sender,',
-  'bytes32 public constant',
-  'interface IERC20 {',
-  'constructor() public {',
-  'payable function deposit()',
-  'keccak256(abi.encodePacked',
-]
+// Using single characters for a cleaner matrix effect
+const MATRIX_CHARS = '01'
 
 const HackerBackground: React.FC = () => {
   const { theme } = useTheme()
@@ -35,18 +17,15 @@ const HackerBackground: React.FC = () => {
     const ctx = canvas.getContext('2d')
     if (!ctx) return
 
-    // Clear any existing animation
     if (animationFrameRef.current) {
       cancelAnimationFrame(animationFrameRef.current)
     }
 
-    // Clear the canvas completely
     ctx.clearRect(0, 0, canvas.width, canvas.height)
 
     const resizeCanvas = () => {
       canvas.width = window.innerWidth
       canvas.height = window.innerHeight
-      // Clear canvas after resize
       ctx.clearRect(0, 0, canvas.width, canvas.height)
     }
     resizeCanvas()
@@ -54,81 +33,69 @@ const HackerBackground: React.FC = () => {
 
     // Configuration
     const fontSize = 16
+    const columnWidth = fontSize * 1.5 // Tighter spacing between columns
     const rows = Math.ceil(canvas.height / fontSize)
-    const cols = Math.ceil(canvas.width / (fontSize * 16))
+    const cols = Math.ceil(canvas.width / columnWidth)
     
     // Create grid
     const grid = Array(cols).fill(null).map(() => ({
       positions: Array(rows).fill(null).map(() => ({
-        text: '',
+        char: '',
         opacity: 0
       })),
       nextDropTime: 0,
-      startDropTime: 0 // Will be set to proper time in first animation frame
+      startDropTime: 0
     }))
 
     ctx.font = `${fontSize}px "Fira Code", monospace`
+    ctx.textAlign = 'center' // Center the characters in their columns
 
     let lastTime = 0
     const animate = (currentTime: number) => {
       if (!ctx) return
       
-      // Only update every 200ms
-      if (currentTime - lastTime > 200) {
+      if (currentTime - lastTime > 100) { // Slower updates (changed from 50 to 100ms)
         lastTime = currentTime
 
-        // Clear canvas completely
         ctx.clearRect(0, 0, canvas.width, canvas.height)
 
-        // Update and draw grid
         grid.forEach((column, x) => {
-          // Reset startDropTime if it's the initial value
           if (column.startDropTime === 0) {
-            column.startDropTime = currentTime + Math.random() * 3000
+            column.startDropTime = currentTime + Math.random() * 3000 // More delay before start
           }
 
-          // Skip if column hasn't started yet
           if (currentTime < column.startDropTime) return;
 
-          // Check if it's time for a new drop in this column
           if (currentTime >= column.nextDropTime) {
-            // Add new character at top with random offset
-            const offset = Math.floor(Math.random() * 3) - 1 // -1, 0, or 1
-            const xPos = x * fontSize * 16 + (offset * fontSize * 2)
-            
             column.positions[0] = {
-              text: CODE_SNIPPETS[Math.floor(Math.random() * CODE_SNIPPETS.length)],
-              opacity: 0.3
+              char: MATRIX_CHARS[Math.floor(Math.random() * MATRIX_CHARS.length)],
+              opacity: 0.8
             }
             
-            // Set next drop time
-            column.nextDropTime = currentTime + 2000 + Math.random() * 3000
+            column.nextDropTime = currentTime + 300 + Math.random() * 500 // Slower drops
           }
 
-          // Draw and update each position
           column.positions.forEach((pos, y) => {
-            if (pos.text) {
+            if (pos.char) {
               const alpha = pos.opacity
               ctx.fillStyle = isDark 
-                ? `rgba(0, 255, 0, ${alpha})` // Bright green for dark mode
-                : `rgba(0, 0, 0, ${alpha})` // Black for light mode
+                ? `rgba(0, 255, 0, ${alpha})`
+                : `rgba(0, 0, 0, ${alpha})`
 
               ctx.fillText(
-                pos.text,
-                x * fontSize * 16,
+                pos.char,
+                x * columnWidth + columnWidth / 2,
                 y * fontSize
               )
 
-              // Fade out
-              pos.opacity = Math.max(0, pos.opacity - 0.01)
+              pos.opacity = Math.max(0, pos.opacity - 0.008) // Slower fade out
             }
           })
 
-          // Move everything down one position
           for (let i = column.positions.length - 1; i > 0; i--) {
             column.positions[i] = column.positions[i - 1]
           }
-          column.positions[0] = { text: '', opacity: 0 }
+          column.positions[0] = { char: '', opacity: 0 }
         })
       }
 
