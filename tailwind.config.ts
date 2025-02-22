@@ -42,6 +42,14 @@ const config = {
   					'background-position': '0% 0%'
   				}
   			},
+  			'slow-spin': {
+  				'from': {
+  					'transform': 'rotate(0deg)'
+  				},
+  				'to': {
+  					'transform': 'rotate(360deg)'
+  				}
+  			},
   			'border-beam': {
   				'100%': {
   					'offset-distance': '100%'
@@ -95,7 +103,77 @@ const config = {
   					'background-position': 'right center'
   				}
   			},
-  			'pulse': 'pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+  			'pulse': {
+  				'0%, 100%': {
+  					opacity: '1'
+  				},
+  				'50%': {
+  					opacity: '.5'
+  				}
+  			},
+  			'slow-drift': {
+  				'0%, 100%': {
+  					'transform': 'translate(0%, 0%) scale(1)'
+  				},
+  				'50%': {
+  					'transform': 'translate(2%, 2%) scale(1.05)'
+  				}
+  			},
+  			'slow-drift-delay': {
+  				'0%, 100%': {
+  					'transform': 'translate(0%, 0%) scale(1.05)'
+  				},
+  				'50%': {
+  					'transform': 'translate(-2%, 2%) scale(1)'
+  				}
+  			},
+  			'slow-drift-alt': {
+  				'0%, 100%': {
+  					'transform': 'translate(0%, 0%) scale(1)'
+  				},
+  				'50%': {
+  					'transform': 'translate(-1%, 1%) scale(1.02)'
+  				}
+  			},
+  			'pulse-glow': {
+  				'0%, 100%': {
+  					'transform': 'rotate(0deg)',
+  					'opacity': '0.1'
+  				},
+  				'50%': {
+  					'transform': 'rotate(180deg)',
+  					'opacity': '0.2'
+  				}
+  			},
+  			'float': {
+  				'0%, 100%': {
+  					'transform': 'translate(0%, 0%)'
+  				},
+  				'33%': {
+  					'transform': 'translate(2%, -2%)'
+  				},
+  				'66%': {
+  					'transform': 'translate(-1%, 1%)'
+  				}
+  			},
+  			'pulse-subtle': {
+  				'0%, 100%': {
+  					'opacity': '0.03'
+  				},
+  				'50%': {
+  					'opacity': '0.05'
+  				}
+  			},
+  			'sparkle-fade': {
+  				'0%, 100%': {
+  					opacity: '0',
+  					transform: 'scale(0.4)'
+  				},
+  				'50%': {
+  					opacity: '1',
+  					transform: 'scale(1)'
+  				}
+  			},
   		},
   		colors: {
   			border: 'hsl(var(--border))',
@@ -148,11 +226,20 @@ const config = {
   			'accordion-down': 'accordion-down 0.2s ease-out',
   			'accordion-up': 'accordion-up 0.2s ease-out',
   			'meteor-effect': 'meteor 5s linear infinite',
+  			'slow-spin': 'slow-spin 20s linear infinite',
   			'border-beam': 'border-beam calc(var(--duration)*1s) infinite linear',
   			'shimmer': 'shimmer 2s linear infinite',
   			'gradient': 'gradient 3s linear infinite',
   			'gradient-xy': 'gradient-xy 15s ease infinite',
   			'pulse': 'pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+  			'slow-drift': 'slow-drift 20s ease-in-out infinite',
+  			'slow-drift-delay': 'slow-drift-delay 25s ease-in-out infinite',
+  			'slow-drift-alt': 'slow-drift-alt 22s ease-in-out infinite',
+  			'pulse-slow': 'pulse-glow 20s linear infinite',
+  			'float-particles': 'float 20s ease-in-out infinite',
+  			'float-delay': 'float 15s ease-in-out infinite',
+  			'pulse-subtle': 'pulse-subtle 10s ease-in-out infinite',
+  			'sparkle-fade': 'sparkle-fade 3s ease-in-out infinite',
   		},
   		backgroundImage: {
   			'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
@@ -181,6 +268,10 @@ const config = {
         },
         ".mask-radial": {
           "mask-image": "radial-gradient(circle at center, black, transparent 80%)",
+        },
+        ".bg-noise": {
+          "background-image": "url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIzMDAiIGhlaWdodD0iMzAwIj48ZmlsdGVyIGlkPSJhIj48ZmVUdXJidWxlbmNlIHR5cGU9ImZyYWN0YWxOb2lzZSIgYmFzZUZyZXF1ZW5jeT0iLjc1IiBzdGl0Y2hUaWxlcz0ic3RpdGNoIi8+PC9maWx0ZXI+PHJlY3Qgd2lkdGg9IjMwMCIgaGVpZ2h0PSIzMDAiIGZpbHRlcj0idXJsKCNhKSIgb3BhY2l0eT0iLjA1Ii8+PC9zdmc+')",
+          "background-repeat": "repeat",
         },
       });
     }),

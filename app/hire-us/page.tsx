@@ -25,47 +25,20 @@ const DexCard: React.FC<{ name: string; className?: string }> = ({ name, classNa
 );
 
 // Lazy load components for better performance
-const HeroSection = lazy(() => import("@/app/zap/components/hero-section"));
-const CTASection = lazy(() => import("@/app/zap/components/cta-section"));
-const HowItWorksSection = lazy(() => import("@/app/zap/components/how-it-works-section"));
-const BenefitsSection = lazy(() => import("@/app/zap/components/benefits-section"));
-const ProjectsSection = lazy(() => import("@/app/zap/components/projects-section"));
+const HeroSection = lazy(() => import("@/app/hire-us/components/hero-section"));
+const CTASection = lazy(() => import("@/app/_pagetemplate/components/cta-section"));
 
 // Loading fallback component
 const SectionSkeleton = () => (
     <div className="w-full h-[50vh] animate-pulse bg-accent/10 rounded-lg" />
 );
 
-export default function ZapPage() {
+export default function HireUsPage() {
     return (
-        <div className="flex flex-col">
+        <>
             <Suspense fallback={<SectionSkeleton />}>
                 <HeroSection />
             </Suspense>
-
-            <div className="bg-accent/5 py-24">
-                <Suspense fallback={<SectionSkeleton />}>
-                    <BenefitsSection />
-                </Suspense>
-            </div>
-
-            <div className="py-24">
-                <Suspense fallback={<SectionSkeleton />}>
-                    <HowItWorksSection />
-                </Suspense>
-            </div>
-
-            <div className="bg-accent/5 py-24">
-                <Suspense fallback={<SectionSkeleton />}>
-                    <ProjectsSection />
-                </Suspense>
-            </div>
-
-            <div className="py-24">
-                <Suspense fallback={<SectionSkeleton />}>
-                    <CTASection />
-                </Suspense>
-            </div>
-        </div>
+        </>
     );
 }

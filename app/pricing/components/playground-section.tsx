@@ -94,6 +94,7 @@ export default function PlaygroundSection() {
             viewport={{ once: true }}
             variants={fadeInUp}
             className="py-20 bg-accent/10"
+            id="try-it-out"
         >
             <div className="container max-w-4xl">
                 <div className="text-center space-y-4 mb-12">

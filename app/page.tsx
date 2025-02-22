@@ -43,7 +43,7 @@ function HeroPage() {
                 </span>
               </h1>
               <p className="max-w-[42rem] mx-auto text-xl text-muted-foreground">
-                We are a developer lab dedicated to building simple, secure, and robust decentralized systems.
+                We build simple, secure, and robust decentralized systems. Our focus on innovation, transparency, and efficiency delivers trusted solutions for the blockchain ecosystem.
               </p>
             </div>
 
@@ -74,10 +74,6 @@ function HeroPage() {
       >
         <Products />
       </motion.section>
-
-      {/* Trusted By Section */}
-      <Companies />
-
 
       {/* Stats Section */}
       <motion.section
@@ -125,6 +121,17 @@ function HeroPage() {
             ))}
           </div>
         </div>
+      </motion.section>
+
+      {/* Trusted By Section */}
+      <motion.section
+        initial={{ opacity: 0 }}
+        whileInView={{ opacity: 1 }}
+        viewport={{ once: true }}
+        transition={{ duration: 0.8 }}
+        className="py-24 bg-accent/10 overflow-hidden"
+      >
+        <Companies />
       </motion.section>
 
       {/* Contact Section */}

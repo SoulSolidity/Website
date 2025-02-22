@@ -4,6 +4,7 @@ import { motion } from "framer-motion";
 import { Card } from "@/components/ui/card";
 import { fadeInUp } from "../lib/constants";
 import { useChainData } from "../hooks/use-chain-data";
+import Image from "next/image";
 
 export default function SupportedChainsSection() {
     const { chainData, isLoading, error } = useChainData();
@@ -28,11 +29,14 @@ export default function SupportedChainsSection() {
                             transition={{ type: "spring", stiffness: 300 }}
                         >
                             <Card className="p-4 flex items-center justify-center space-x-3 transition-colors bg-background/80 backdrop-blur-sm">
-                                <img 
+                                <Image 
                                     src={`https://raw.githubusercontent.com/SoulSolidity/registry/refs/heads/main/src/assets/chains/${chain.image}`}
                                     alt={chain.name} 
+                                    width={24}
+                                    height={24}
                                     className="w-6 h-6"
                                     onError={(e) => {
+                                        // @ts-ignore - TypeScript doesn't know about the currentTarget property
                                         e.currentTarget.src = '/logos/generic-chain.svg';
                                     }}
                                 />

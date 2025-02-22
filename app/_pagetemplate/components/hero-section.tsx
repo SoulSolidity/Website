@@ -4,7 +4,6 @@ import { motion } from "framer-motion";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { fadeInUpDelayed } from "../lib/constants";
-import { DexCard } from "./dex-card";
 
 const fadeInUp = {
     hidden: { opacity: 0, y: 20 },
@@ -26,10 +25,10 @@ export default function HeroSection() {
                     className="mx-auto text-center max-w-3xl"
                 >
                     <h1 className="text-4xl font-bold tracking-tight sm:text-6xl bg-clip-text">
-                        Every Token Price, Instantly.
+                        Template Page
                     </h1>
                     <p className="mt-6 text-lg leading-8 text-muted-foreground">
-                        Developer-friendly API for real-time token and LP pricing, with automatic new token support.
+                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Maiores sint ducimus unde quibusdam, consectetur quod dolore rem amet minus odit.
                     </p>
                     <div className="mt-10 flex items-center justify-center gap-x-6">
                         <Link href="/docs">

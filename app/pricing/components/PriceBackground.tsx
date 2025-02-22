@@ -195,7 +195,7 @@ const PriceBackground: React.FC = () => {
   }, [isDark]);
 
   return (
-    <div className="absolute inset-x-0 top-0 h-[40vh] sm:h-[50vh] md:h-[500px] -z-10 overflow-hidden">
+    <div className="absolute inset-x-0 -top-20 h-[40vh] sm:h-[50vh] md:h-[500px] -z-10 overflow-hidden">
       <div className="absolute inset-0 bg-gradient-to-b from-background/0 via-background/10 to-background" />
       <canvas
         ref={canvasRef}

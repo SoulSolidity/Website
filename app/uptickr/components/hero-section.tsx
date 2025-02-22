@@ -3,8 +3,6 @@
 import { motion } from "framer-motion";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
-import { fadeInUpDelayed } from "../lib/constants";
-import { DexCard } from "./dex-card";
 
 const fadeInUp = {
     hidden: { opacity: 0, y: 20 },
@@ -26,25 +24,16 @@ export default function HeroSection() {
                     className="mx-auto text-center max-w-3xl"
                 >
                     <h1 className="text-4xl font-bold tracking-tight sm:text-6xl bg-clip-text">
-                        Every Token Price, Instantly.
+                        Coming Soon
                     </h1>
                     <p className="mt-6 text-lg leading-8 text-muted-foreground">
-                        Developer-friendly API for real-time token and LP pricing, with automatic new token support.
+                        We're working on something exciting! Stay tuned for updates about Uptickr.
                     </p>
                     <div className="mt-10 flex items-center justify-center gap-x-6">
-                        <Link href="/docs">
+                        <Link href="/">
                             <Button size="lg" className="group relative overflow-hidden">
-                                <span className="relative z-10">Get Started</span>
+                                <span className="relative z-10">Back to Home</span>
                                 <div className="absolute inset-0 bg-gradient-to-r from-primary/80 to-primary opacity-0 group-hover:opacity-100 transition-opacity" />
-                            </Button>
-                        </Link>
-                        <Link href="#try-it-out">
-                            <Button
-                                variant="outline"
-                                size="lg"
-                                className="group relative overflow-hidden"
-                            >
-                                Try it out
                             </Button>
                         </Link>
                     </div>
