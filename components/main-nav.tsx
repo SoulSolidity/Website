@@ -4,7 +4,7 @@ import * as React from "react";
 import Link from "next/link";
 import { motion, Variants } from "framer-motion";
 import { cn } from "@/lib/utils";
-import { Icons } from "@/components/icons";
+import GoldChromeButton from "@/components/GoldChromeButton";
 import { Button } from "./ui/button";
 import { Sheet, SheetContent, SheetTrigger } from "./ui/sheet";
 import { Menu, ChevronDown } from "lucide-react";
@@ -97,10 +97,11 @@ export function MainNav() {
     >
       <div className="container flex h-16 items-center justify-between mx-auto max-w-screen-2xl">
         <div className="flex items-center gap-6">
-          <Link href="/" className="flex items-center gap-2 transition-opacity hover:opacity-80">
-            <Icons.logo className="h-6 w-6" />
-            <span className="font-bold hidden sm:block">Soul Solidity</span>
-          </Link>
+          <div className="flex items-center gap-2">
+            <div className="hidden sm:block">
+              <GoldChromeButton text="Soul Solidity" />
+            </div>
+          </div>
 
           <div className="hidden md:flex items-center gap-6">
             <DropdownMenu>
@@ -180,7 +181,6 @@ export function MainNav() {
                   href="/"
                   className="flex items-center gap-2 py-2"
                 >
-                  <Icons.logo className="h-6 w-6" />
                   <span className="font-bold">Soul Solidity</span>
                 </Link>
                 <div className="flex flex-col gap-2">
