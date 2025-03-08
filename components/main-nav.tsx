@@ -98,8 +98,8 @@ export function MainNav() {
       <div className="container flex h-16 items-center justify-between mx-auto max-w-screen-2xl">
         <div className="flex items-center gap-6">
           <div className="flex items-center gap-2">
-            <div className="hidden sm:block">
-              <GoldChromeButton text="Soul Solidity" />
+            <div className="block">
+              <GoldChromeButton text="Soul Solidity" className="sm:text-lg text-base" />
             </div>
           </div>
 

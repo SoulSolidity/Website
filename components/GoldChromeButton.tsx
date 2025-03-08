@@ -31,9 +31,9 @@ export const GoldChromeButton = ({
       title={text}
     >
       <div 
-        className={`px-4 py-2 rounded-md text-lg font-bold text-black transition-all duration-300 ${
+        className={`px-4 py-2 rounded-md font-bold text-black transition-all duration-300 ${
           isHovered ? 'scale-105' : ''
-        }`}
+        } ${className}`}
         style={{
           backgroundImage: `linear-gradient(135deg, 
             #F0C419 0%, 
