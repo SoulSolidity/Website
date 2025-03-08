@@ -20,6 +20,10 @@ import { Input } from "@/components/ui/input";
 import { Search } from "lucide-react";
 import { cn } from "@/lib/utils";
 import Image from "next/image";
+import ErrorBoundary from "@/components/error-boundary";
+
+// TODO: Need to implement
+import { useDexData } from "./hooks/use-dex-data";
 
 const supportedChains = [
     { name: "Ethereum", logo: "/logos/ethereum.svg" },
@@ -171,63 +175,6 @@ const POPULAR_TOKENS: Token[] = [
     }
 ];
 
-// Custom hook for fetching DEX data
-const useDexData = () => {
-    const [dexData, setDexData] = useState<DexFactories | null>(null);
-    const [isLoading, setIsLoading] = useState(true);
-    const [error, setError] = useState<string | null>(null);
-
-    useEffect(() => {
-        const fetchDexData = async () => {
-            try {
-                const response = await fetch('https://raw.githubusercontent.com/SoulSolidity/registry/refs/heads/main/data/constants/dex.json');
-                const data = await response.json();
-                setDexData(data);
-            } catch (err) {
-                setError('Failed to fetch DEX data');
-                console.error('Failed to fetch DEX data:', err);
-            } finally {
-                setIsLoading(false);
-            }
-        };
-
-        fetchDexData();
-    }, []);
-
-    const getUniqueDexes = useCallback(() => {
-        if (!dexData) return new Set<string>();
-
-        const uniqueDexes = new Set<string>();
-        Object.values(dexData.dexFactories).forEach((chainDexes) => {
-            chainDexes.forEach((dex) => uniqueDexes.add(dex.name));
-        });
-        return uniqueDexes;
-    }, [dexData]);
-
-    const getFeaturedDexes = useCallback(() => {
-        if (!dexData) return [];
-
-        const uniqueDexMap = new Map<string, DexProtocol>();
-        Object.values(dexData.dexFactories).forEach((chainDexes) => {
-            chainDexes.forEach((dex) => {
-                if (!uniqueDexMap.has(dex.name)) {
-                    uniqueDexMap.set(dex.name, dex);
-                }
-            });
-        });
-
-        return Array.from(uniqueDexMap.values());
-    }, [dexData]);
-
-    return {
-        dexData,
-        isLoading,
-        error,
-        getUniqueDexes,
-        getFeaturedDexes,
-    };
-};
-
 // DexCard component for reusability
 const DexCard: React.FC<{ name: string; className?: string }> = ({ name, className }) => (
     <Card className={cn("p-4 flex items-center justify-center space-x-3 hover:border-primary transition-colors bg-background/80 backdrop-blur-sm", className)}>
@@ -263,24 +210,51 @@ export default function PricingPage() {
     return (
         <>
             <PriceBackground />
-            <Suspense fallback={<SectionSkeleton />}>
-                <HeroSection />
-            </Suspense>
-            <Suspense fallback={<SectionSkeleton />}>
-                <SupportedChainsSection />
-            </Suspense>
-            <Suspense fallback={<SectionSkeleton />}>
-                <SupportedDexesSection />
-            </Suspense>
-            {/* <Suspense fallback={<SectionSkeleton />}>
-                <ComparisonSection />
-            </Suspense> */}
-            <Suspense fallback={<SectionSkeleton />}>
-                <PlaygroundSection />
-            </Suspense>
-            <Suspense fallback={<SectionSkeleton />}>
-                <CTASection />
-            </Suspense>
+            <ErrorBoundary>
+                <Suspense fallback={<SectionSkeleton />}>
+                    <HeroSection />
+                </Suspense>
+            </ErrorBoundary>
+            
+            <ErrorBoundary>
+                <Suspense fallback={<SectionSkeleton />}>
+                    <SupportedChainsSection />
+                </Suspense>
+            </ErrorBoundary>
+            
+            <ErrorBoundary>
+                <Suspense fallback={<SectionSkeleton />}>
+                    <SupportedDexesSection />
+                </Suspense>
+            </ErrorBoundary>
+            
+            <ErrorBoundary
+                onError={(error) => {
+                    console.error("PlaygroundSection error:", error);
+                }}
+                fallback={
+                    <div className="py-20 bg-accent/10">
+                        <div className="container max-w-4xl">
+                            <div className="text-center space-y-4 mb-12">
+                                <h2 className="text-3xl font-bold">Try It Out</h2>
+                                <p className="text-muted-foreground">
+                                    This section is temporarily unavailable. We're working on it!
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                }
+            >
+                <Suspense fallback={<SectionSkeleton />}>
+                    <PlaygroundSection />
+                </Suspense>
+            </ErrorBoundary>
+            
+            <ErrorBoundary>
+                <Suspense fallback={<SectionSkeleton />}>
+                    <CTASection />
+                </Suspense>
+            </ErrorBoundary>
         </>
     );
 }

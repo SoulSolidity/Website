@@ -196,10 +196,10 @@ export function MainNav() {
                   ))}
                 </div>
                 <Link
-                  href="/#features"
+                  href="/#about"
                   className="text-muted-foreground hover:text-foreground transition-colors py-2"
                 >
-                  Features
+                  About
                 </Link>
                 <Link
                   href="/#contact"
