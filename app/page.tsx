@@ -8,6 +8,7 @@ import Link from "next/link";
 import React from "react";
 import { motion } from "framer-motion";
 import HackerBackground from "@/app/components/HackerBackground";
+import { LogoWithTheme } from "./components/LogoWithTheme";
 
 function HeroPage() {
   return (
@@ -23,15 +24,8 @@ function HeroPage() {
             transition={{ duration: 0.8 }}
             className="max-w-[64rem] mx-auto text-center space-y-8"
           >
-            <div className="inline-block relative">
-              <div className="absolute -inset-1 bg-gradient-to-r from-pink-600 via-purple-600 to-blue-600 rounded-full blur opacity-75 animate-gradient-xy"></div>
-              <div className="relative px-6 py-3 bg-black rounded-full ring-1 ring-gray-900/5 leading-none">
-                <span className="text-sm md:text-base font-medium bg-gradient-to-r from-pink-500 via-purple-500 to-blue-500 bg-[length:200%_auto] animate-gradient bg-clip-text text-transparent flex items-center gap-2">
-                  <span className="animate-pulse">✨</span>
-                  Welcome to Soul Solidity
-                  <span className="animate-pulse">✨</span>
-                </span>
-              </div>
+            <div className="w-full max-w-[500px] mx-auto">
+              <LogoWithTheme />
             </div>
 
             <div className="space-y-4">
@@ -119,6 +113,88 @@ function HeroPage() {
                 <p className="text-xs text-muted-foreground">{stat.description}</p>
               </motion.div>
             ))}
+          </div>
+        </div>
+      </motion.section>
+
+      {/* About Section */}
+      <motion.section
+        id="about"
+        initial={{ opacity: 0 }}
+        whileInView={{ opacity: 1 }}
+        viewport={{ once: true }}
+        transition={{ duration: 0.8 }}
+        className="py-24 bg-background"
+      >
+        <div className="container">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.8 }}
+            className="text-center mb-16 max-w-2xl mx-auto"
+          >
+            <h2 className="text-3xl font-bold tracking-tight sm:text-4xl mb-4">
+              About Soul Solidity
+            </h2>
+            <p className="text-xl text-muted-foreground">
+              Our journey, mission, and the team behind our blockchain innovations
+            </p>
+          </motion.div>
+
+          <div className="grid md:grid-cols-2 gap-12 items-center max-w-5xl mx-auto">
+            <motion.div
+              initial={{ opacity: 0, x: -20 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.8 }}
+            >
+              <div className="space-y-6">
+                <div className="space-y-2">
+                  <h3 className="text-2xl font-bold">Our Mission</h3>
+                  <p className="text-muted-foreground">
+                    At Soul Solidity, we're dedicated to building the future of decentralized finance through innovative, secure, and efficient blockchain solutions. Our mission is to accelerate the adoption of blockchain technology by creating robust tools and services that solve real-world problems.
+                  </p>
+                </div>
+                <div className="space-y-2">
+                  <h3 className="text-2xl font-bold">Our Expertise</h3>
+                  <p className="text-muted-foreground">
+                    With over 5 years of experience in blockchain development, our team specializes in Solidity smart contracts, DeFi protocols, and custom blockchain solutions. We've helped numerous projects launch securely and scale effectively in the ever-evolving crypto landscape.
+                  </p>
+                </div>
+              </div>
+            </motion.div>
+
+            <motion.div
+              initial={{ opacity: 0, x: 20 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.8, delay: 0.2 }}
+              className="rounded-xl overflow-hidden border bg-card/50 backdrop-blur-sm p-6"
+            >
+              <div className="space-y-6">
+                <div className="space-y-2">
+                  <h3 className="text-2xl font-bold">Our Values</h3>
+                  <ul className="space-y-3">
+                    {[
+                      { title: "Security First", description: "We prioritize security in every line of code we write." },
+                      { title: "Transparency", description: "We believe in open communication and clear documentation." },
+                      { title: "Innovation", description: "We constantly explore new technologies and approaches." },
+                      { title: "Quality", description: "We deliver well-tested, robust solutions that stand the test of time." }
+                    ].map((value, i) => (
+                      <li key={i} className="flex items-start gap-2">
+                        <div className="h-6 w-6 rounded-full bg-primary/10 flex items-center justify-center mt-0.5">
+                          <div className="h-3 w-3 rounded-full bg-primary" />
+                        </div>
+                        <div>
+                          <span className="font-medium">{value.title}:</span> {value.description}
+                        </div>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              </div>
+            </motion.div>
           </div>
         </div>
       </motion.section>
