@@ -10,7 +10,7 @@ import { motion } from "framer-motion"
 // import { ModeToggle } from "@/components/mode-toggle"
 
 const socialLinks = [
-  { name: "Twitter", href: "https://twitter.com/SoulSolidity", icon: "twitter" },
+  { name: "Twitter", href: "https://twitter.com/SoulSolidity", icon: "twitter", className: "fill-muted-foreground hover:fill-foreground transition-colors" },
   // { name: "Discord", href: "https://discord.gg/soulsolidity", icon: "discord" },
   { name: "Telegram", href: "https://t.me/doublo", icon: "telegram" },
   { name: "GitHub", href: "https://github.com/SoulSolidity", icon: "gitHub" },
@@ -44,7 +44,7 @@ export function SiteFooter({ className }: React.HTMLAttributes<HTMLElement>) {
                     rel="noreferrer"
                     aria-label={link.name}
                   >
-                    <Icon className="h-4 w-4" />
+                    <Icon className={cn("h-4 w-4", link.className)} />
                   </a>
                 </Button>
               )
