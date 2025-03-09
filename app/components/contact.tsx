@@ -3,10 +3,10 @@
 import { Button } from "@/components/ui/button";
 import { motion } from "framer-motion";
 import { Icons } from "@/components/icons";
-import { Mail } from "lucide-react";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { useState, FormEvent } from "react";
+import { useToast } from "@/hooks/use-toast";
 
 interface SocialLink {
     href: string;
@@ -44,16 +44,59 @@ const Contact = () => {
         return Object.keys(newErrors).length === 0;
     };
 
+    const { toast } = useToast();
+
     const handleSubmit = async (e: FormEvent) => {
         e.preventDefault();
         if (!validateForm()) return;
 
         setIsSubmitting(true);
-        // Here you would typically send the form data to your backend
-        await new Promise((resolve) => setTimeout(resolve, 1000)); // Simulate API call
-        setIsSubmitting(false);
-        setFormData({ name: "", email: "", message: "" });
-        // Add toast notification here
+        
+        try {
+            const response = await fetch('/api/contact', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(formData),
+            });
+
+            const data = await response.json();
+
+            if (data.success) {
+                // Success
+                toast({
+                    title: "Message sent!",
+                    description: "We'll get back to you as soon as possible.",
+                    variant: "default",
+                });
+                // Reset form
+                setFormData({ name: "", email: "", message: "" });
+            } else {
+                // API returned an error
+                if (data.errors) {
+                    // Validation errors
+                    setErrors(data.errors);
+                } else {
+                    // General error
+                    toast({
+                        title: "Error",
+                        description: data.error || "Something went wrong. Please try again.",
+                        variant: "destructive",
+                    });
+                }
+            }
+        } catch (error) {
+            // Network or other error
+            toast({
+                title: "Error",
+                description: "Could not connect to the server. Please try again later.",
+                variant: "destructive",
+            });
+            console.error("Contact form error:", error);
+        } finally {
+            setIsSubmitting(false);
+        }
     };
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
