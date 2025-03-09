@@ -33,7 +33,6 @@ function HeroPage() {
                 Developer Lab with a{" "}
                 <span className="text-primary relative inline-block">
                   Passion for Solidity
-                  <div className="absolute -inset-1 bg-primary/10 blur-xl rounded-lg -z-10" />
                 </span>
               </h1>
               <p className="max-w-[42rem] mx-auto text-xl text-muted-foreground">
@@ -64,7 +63,7 @@ function HeroPage() {
         whileInView={{ opacity: 1 }}
         viewport={{ once: true }}
         transition={{ duration: 0.8 }}
-        className="py-32 bg-accent/10"
+        className="py-32 bg-background"
       >
         <Products />
       </motion.section>
@@ -75,7 +74,7 @@ function HeroPage() {
         whileInView={{ opacity: 1 }}
         viewport={{ once: true }}
         transition={{ duration: 0.8 }}
-        className="py-24 bg-background"
+        className="py-24 bg-accent/10"
       >
         <div className="container">
           <motion.div
@@ -217,7 +216,7 @@ function HeroPage() {
         whileInView={{ opacity: 1 }}
         viewport={{ once: true }}
         transition={{ duration: 0.8 }}
-        className="py-32 bg-background"
+        className="bg-background"
       >
         <Contact />
       </motion.section>
