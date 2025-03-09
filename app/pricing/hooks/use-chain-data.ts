@@ -1,36 +1,85 @@
 import { useEffect, useState } from "react";
+import { z } from "zod";
 
-interface ChainData {
-    name: string;
-    image: string;
-    chainId: number;
-}
+// Define Zod schema for chain data
+const ChainDataSchema = z.object({
+  name: z.string(),
+  image: z.string(),
+  chainId: z.number(),
+});
+
+// Define the type from the schema
+type ChainData = z.infer<typeof ChainDataSchema>;
+
+// Define schema for the API response
+const ConstantsResponseSchema = z.object({
+  priceGetterSupportedChainsImages: z.array(ChainDataSchema),
+});
 
 export function useChainData() {
-    const [chainData, setChainData] = useState<ChainData[]>([]);
-    const [isLoading, setIsLoading] = useState(true);
-    const [error, setError] = useState<string | null>(null);
+  const [chainData, setChainData] = useState<ChainData[]>([]);
+  const [isLoading, setIsLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
+  const [validationErrors, setValidationErrors] = useState<z.ZodError | null>(
+    null
+  );
 
-    useEffect(() => {
-        const fetchChainData = async () => {
-            try {
-                const response = await fetch('https://raw.githubusercontent.com/SoulSolidity/registry/refs/heads/main/data/constants/constants.json');
-                const data = await response.json();
-                setChainData(data.priceGetterSupportedChainsImages);
-            } catch (err) {
-                setError('Failed to fetch chain data');
-                console.error('Failed to fetch chain data:', err);
-            } finally {
-                setIsLoading(false);
-            }
-        };
+  useEffect(() => {
+    const fetchChainData = async () => {
+      try {
+        const response = await fetch(
+          "https://raw.githubusercontent.com/SoulSolidity/registry/refs/heads/main/data/constants/constants.json"
+        );
+        const rawData = await response.json();
 
-        fetchChainData();
-    }, []);
+        // Validate with Zod
+        try {
+          const validatedData = ConstantsResponseSchema.parse(rawData);
+          setChainData(validatedData.priceGetterSupportedChainsImages);
+          console.log("Chain data validated successfully");
+        } catch (validationError) {
+          if (validationError instanceof z.ZodError) {
+            console.warn(
+              "Chain data validation failed:",
+              validationError.format()
+            );
+            setValidationErrors(validationError);
+          } else {
+            console.warn("Unknown validation error:", validationError);
+          }
 
-    return {
-        chainData,
-        isLoading,
-        error
+          // Fallback to manual validation for resilience
+          const validChains = Array.isArray(
+            rawData.priceGetterSupportedChainsImages
+          )
+            ? rawData.priceGetterSupportedChainsImages.filter(
+                (chain: any) =>
+                  typeof chain === "object" &&
+                  chain !== null &&
+                  typeof chain.name === "string" &&
+                  typeof chain.image === "string" &&
+                  typeof chain.chainId === "number"
+              )
+            : [];
+
+          setChainData(validChains);
+        }
+      } catch (err) {
+        setError("Failed to fetch chain data");
+        console.error("Failed to fetch chain data:", err);
+        setChainData([]);
+      } finally {
+        setIsLoading(false);
+      }
     };
-} 
+
+    fetchChainData();
+  }, []);
+
+  return {
+    chainData,
+    isLoading,
+    error,
+    validationErrors,
+  };
+}

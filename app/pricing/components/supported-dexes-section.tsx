@@ -6,8 +6,41 @@ import { useDexData } from "../hooks/use-dex-data";
 import { DexCard } from "./dex-card";
 
 export default function SupportedDexesSection() {
-    const { isLoading, getUniqueDexes } = useDexData();
+    const { isLoading, error, getUniqueDexes } = useDexData();
     const dexes = getUniqueDexes();
+
+    // Show loading state
+    if (isLoading) {
+        return (
+            <section className="py-20 bg-accent/10">
+                <div className="container">
+                    <div className="text-center space-y-4 mb-12">
+                        <h2 className="text-3xl font-bold">Supported DEX Protocols</h2>
+                    </div>
+                    <div className="flex justify-center items-center py-12">
+                        <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-primary"></div>
+                    </div>
+                </div>
+            </section>
+        );
+    }
+
+    // Show error state
+    if (error) {
+        return (
+            <section className="py-20 bg-accent/10">
+                <div className="container">
+                    <div className="text-center space-y-4 mb-12">
+                        <h2 className="text-3xl font-bold">Supported DEX Protocols</h2>
+                    </div>
+                    <div className="text-center text-red-500 py-8">
+                        <p>Error loading DEX protocols: {error}</p>
+                        <p className="mt-2 text-sm text-muted-foreground">Please try refreshing the page.</p>
+                    </div>
+                </div>
+            </section>
+        );
+    }
 
     return (
         <motion.section
@@ -65,4 +98,4 @@ export default function SupportedDexesSection() {
             </div>
         </motion.section>
     );
-} 
+}
