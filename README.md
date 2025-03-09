@@ -1,88 +1,85 @@
-# QuotesAI
+# Soul Solidity Website
 
-QuotesAI is built using Next.js, Tailwind CSS, Shadcn-ui, Magic-ui, Supabase, NextAuth, and Prisma. It is powered by Vercel and the OpenAI API. It uses the Goodreads API to generate category-based quotes as per your current mood/vibe.
+Soul Solidity is a developer lab with a passion for Solidity. We build simple, secure, and robust decentralized systems. Our focus on innovation, transparency, and efficiency delivers trusted solutions for the blockchain ecosystem.
 
-## Video Overview
+## Technology Stack
 
-Watch the video below for a quick overview of QuotesAI:
+- **Frontend**: Next.js 13, React 18, TailwindCSS
+- **UI Components**: Radix UI, Framer Motion
+- **Styling**: TailwindCSS with custom components
+- **State Management**: React hooks and context
+- **API**: Next.js API routes
 
-https://github.com/DarkInventor/QuotesAI/assets/67015517/e59b2402-772b-4ede-a28d-951278e6c555
+## Features
 
-
-## Environment Variables
-
-### Supabase Connection Pooling
-
-```
-DATABASE_URL=
-```
-
-### NextAuth Configuration
-
-```
-NEXTAUTH_SECRET=
-NEXTAUTH_URL=http://localhost:3000
-```
-
-### Google OAuth Configuration
-
-```
-GOOGLE_CLIENT_ID=
-GOOGLE_CLIENT_SECRET=
-```
-
-### GitHub OAuth Configuration
-
-```
-GITHUB_ID=
-GITHUB_SECRET=
-GITHUB_ACCESS_TOKEN=
-```
-
-### Stripe Configuration
-
-```
-STRIPE_API_KEY=
-STRIPE_WEBHOOK_SECRET=
-```
+- Responsive design
+- Dark/light mode support
+- Product showcase
+- Contact form with Discord integration
+- Social proof section
+- Company statistics
 
 ## Setup Instructions
 
 1. **Clone the repository:**
+
    ```sh
-   git clone https://github.com/DarkInventor/QuotesAI.git
-   cd QuotesAI
+   git clone https://github.com/SoulSolidity/soul-solidity-website.git
+   cd soul-solidity-website
    ```
 
-2. **Create and populate the `.env` file:**
-   ```sh
-   cp .env.example .env
-   ```
-   Edit the `.env` file and add your credentials.
+2. **Install dependencies:**
 
-3. **Install dependencies:**
    ```sh
-   pnpm install
+   yarn install
    ```
+
+3. **Create and populate the `.env.local` file:**
+
+   ```sh
+   cp .env.local.example .env.local
+   ```
+
+   Edit the `.env.local` file and add your credentials.
 
 4. **Run the development server:**
+
    ```sh
-   pnpm run dev
+   yarn dev
    ```
 
 5. **Open your browser and navigate to:**
+
    ```
    http://localhost:3000
    ```
 
+## Environment Variables
+
+### Discord Integration
+
+```
+# Discord webhook URL for contact form notifications
+DISCORD_WEBHOOK_URL=https://discord.com/api/webhooks/your-webhook-url
+
+# Optional: Discord role ID to mention in contact form notifications
+DISCORD_NOTIFICATION_ROLE_ID=123456789012345678
+```
+
+See the [Discord Webhook Integration Guide](./docs/integration/discord-webhook.md) for detailed setup instructions.
+
+## Documentation
+
+- [Architecture Overview](./docs/architecture/overview.md)
+- [Architecture Decision Records](./docs/adr/)
+- [Integration Guides](./docs/integration/)
+
+## Contact Form Integration
+
+The contact form uses a dependency injection pattern to allow for multiple notification channels. Currently, it supports sending notifications to Discord via webhooks, but it can be extended to support other channels like email.
+
+See the [Contact Service Architecture Diagram](./docs/architecture/diagrams/contact-service.md) for more details.
+
 ## License
 
-This project is licensed under the MIT License. See the [LICENSE](https://github.com/DarkInventor/QuotesAI/blob/main/License.md) file for details.
-
-## Contributing
-
-1. Fork the repository.
-2. Create your feature branch (`git checkout -b feature/your-feature`).
-3. Commit your changes (`git commit -am 'Add some feature'`).
-4. Push to the branch (`git push origin feature/your-feature`).
-5. Create a new Pull Request.
+This project is licensed under the MIT License. See the [LICENSE](./License.md) file for details.
