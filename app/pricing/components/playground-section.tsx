@@ -52,7 +52,7 @@ export default function PlaygroundSection() {
         setCustomPrice(null);
         try {
             const response = await fetch(
-                `https://price-getter-api-ee68578946e6.herokuapp.com/price?tokenAddress=${address}&chainId=${chainId}`
+                `https://price-getter-api-ee68578946e6.herokuapp.com/price?tokenAddress=${address}&chain=${chainId}`
             );
             const data = await response.json();
             if (data.error) {
@@ -151,11 +151,10 @@ export default function PlaygroundSection() {
                                             key={token.address}
                                             variant="outline"
                                             size="icon"
-                                            className={`size-12 p-0 rounded-full relative transition-all ${
-                                                tokenAddress === token.address && !isCustomToken 
-                                                ? "ring-2 ring-primary ring-offset-2 ring-offset-background scale-110 shadow-lg" 
+                                            className={`size-12 p-0 rounded-full relative transition-all ${tokenAddress === token.address && !isCustomToken
+                                                ? "ring-2 ring-primary ring-offset-2 ring-offset-background scale-110 shadow-lg"
                                                 : "hover:scale-105"
-                                            }`}
+                                                }`}
                                             onClick={() => handleTokenSelect(token)}
                                             title={token.name}
                                         >
@@ -270,7 +269,7 @@ export default function PlaygroundSection() {
                                     <div className="overflow-x-auto">
                                         <span className="text-muted-foreground">GET </span>
                                         <span className="text-primary">
-                                            https://price-getter-api-ee68578946e6.herokuapp.com/price?tokenAddress={tokenAddress}&chainId={selectedChain}
+                                            https://price-getter-api-ee68578946e6.herokuapp.com/price?tokenAddress={tokenAddress}&chain={selectedChain}
                                         </span>
                                     </div>
                                     <Button
@@ -278,7 +277,7 @@ export default function PlaygroundSection() {
                                         size="sm"
                                         onClick={() => {
                                             navigator.clipboard.writeText(
-                                                `https://price-getter-api-ee68578946e6.herokuapp.com/price?tokenAddress=${tokenAddress}&chainId=${selectedChain}`
+                                                `https://price-getter-api-ee68578946e6.herokuapp.com/price?tokenAddress=${tokenAddress}&chain=${selectedChain}`
                                             );
                                             setIsCopied(true);
                                             setTimeout(() => setIsCopied(false), 2000);
