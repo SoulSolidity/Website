@@ -12,7 +12,7 @@ export function DexCard({ name, className }: DexCardProps) {
     const displayName = typeof name === 'string' ? name : 'Unknown DEX';
 
     // Create a local fallback image path
-    const fallbackImage = "/images/default-dex.svg";
+    const fallbackImage = "/logos/generic-dex-pricing.svg";
 
     const [imgSrc, setImgSrc] = useState(() => {
         if(typeof name !== 'string') return fallbackImage;
