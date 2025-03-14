@@ -15,8 +15,8 @@ export function DexCard({ name, className }: DexCardProps) {
     const fallbackImage = "/logos/generic-dex-pricing.svg";
 
     const [imgSrc, setImgSrc] = useState(() => {
-        if(typeof name !== 'string') return fallbackImage;
-        return `https://raw.githubusercontent.com/SoulSolidity/registry/refs/heads/main/src/assets/dexes/${name}.png`;
+        if (typeof name !== 'string') return fallbackImage;
+        return `https://raw.githubusercontent.com/SoulSolidity/registry/refs/heads/main/src/assets/dexes/${name}.jpg`;
     });
 
 

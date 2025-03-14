@@ -50,6 +50,7 @@ export interface DexProtocol {
     name: string;
     factory: string;
     router?: string;
+    hideImage?: boolean;
     protocol: (typeof PROTOCOL_TYPES)[keyof typeof PROTOCOL_TYPES];
 }
 

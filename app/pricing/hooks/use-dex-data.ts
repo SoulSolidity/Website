@@ -7,6 +7,7 @@ const DexProtocolSchema = z.object({
   name: z.string(),
   factory: z.string(),
   router: z.string().optional(),
+  hideImage: z.boolean().optional(),
   protocol: z.union([
     z.literal(0), // UNIV2
     z.literal(1), // UNIV3
@@ -76,7 +77,8 @@ export function useDexData() {
           if (
             typeof dex === "object" &&
             dex !== null &&
-            typeof dex.name === "string"
+            typeof dex.name === "string" &&
+            !dex.hideImage
           ) {
             uniqueDexes.add(dex.name);
           }
