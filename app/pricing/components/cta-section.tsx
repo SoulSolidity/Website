@@ -20,7 +20,7 @@ export default function CTASection() {
                         Ready to Get Started?
                     </h2>
                     <p className="text-muted-foreground text-lg">
-                        Check out our comprehensive documentation to integrate our API into your project
+                        Check out our documentation to integrate our API into your project
                     </p>
                     <Button size="lg" asChild className="min-w-40">
                         <Link href="/docs">

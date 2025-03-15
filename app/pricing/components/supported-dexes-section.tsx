@@ -48,25 +48,25 @@ export default function SupportedDexesSection() {
             whileInView="visible"
             viewport={{ once: true }}
             variants={fadeInUp}
-            className="py-20 bg-accent/10"
+            className="py-16 bg-accent/10"
         >
             <div className="container">
-                <div className="text-center space-y-4 mb-12">
-                    <h2 className="text-3xl font-bold">Supported DEX Protocols</h2>
+                <div className="text-center space-y-2 mb-10">
+                    <h2 className="text-2xl font-bold">Supported DEX Protocols</h2>
                 </div>
 
-                <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-6">
+                <div className="grid grid-cols-3 md:grid-cols-4 lg:grid-cols-6 xl:grid-cols-8 gap-6">
                     {Array.from(dexes).map((dexName) => (
                         <motion.div
                             key={dexName}
-                            whileHover={{ scale: 1.05 }}
+                            whileHover={{ scale: 1.03 }}
                             transition={{ type: "spring", stiffness: 300 }}
                         >
                             <DexCard name={dexName} />
                         </motion.div>
                     ))}
                     <motion.div
-                        whileHover={{ scale: 1.05 }}
+                        whileHover={{ scale: 1.03 }}
                         transition={{ type: "spring", stiffness: 300 }}
                     >
                         <a 

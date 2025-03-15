@@ -54,27 +54,26 @@ const Products = () => {
                         whileInView={{ opacity: 1, y: 0 }}
                         viewport={{ once: true }}
                         transition={{ duration: 0.5, delay: 0.2 + index * 0.1 }}
-                        className="relative group rounded-xl bg-accent/10 p-8 shadow-sm flex flex-col h-full hover:scale-[1.02] transition-all duration-300 hover:shadow-lg cursor-pointer"
+                        className="relative group rounded-xl bg-accent/10 shadow-sm flex flex-col h-full hover:scale-[1.02] transition-all duration-300 hover:shadow-lg"
                     >
                         {product.link && (
-                            <>
-                                <Link href={product.link} className="absolute inset-0" aria-label={`Learn more about ${product.title}`} />
-                                <div className="absolute bottom-8 right-8">
+                            <Link href={product.link} className="flex flex-col flex-1 p-8 h-full w-full" aria-label={`Learn more about ${product.title}`}>
+                                <div className="mb-8 inline-flex items-center justify-center rounded-lg bg-primary/10 p-3 self-start group-hover:bg-primary/20 transition-colors">
+                                    {product.icon}
+                                </div>
+                                <h3 className="mb-3 text-xl font-semibold group-hover:text-primary transition-colors">{product.title}</h3>
+                                <p className="text-muted-foreground mb-12 group-hover:text-foreground transition-colors">
+                                    {product.description}
+                                </p>
+                                <div className="mt-auto self-end">
                                     <span 
-                                        className="pointer-events-none text-sm font-medium text-muted-foreground group-hover:text-primary flex items-center group-hover:translate-x-1 transition-all"
+                                        className="text-sm font-medium text-muted-foreground group-hover:text-primary flex items-center group-hover:translate-x-1 transition-all"
                                     >
                                         Learn more <ArrowUp className="ml-2 h-4 w-4 rotate-45" />
                                     </span>
                                 </div>
-                            </>
+                            </Link>
                         )}
-                        <div className="mb-8 inline-flex items-center justify-center rounded-lg bg-primary/10 p-3 self-start group-hover:bg-primary/20 transition-colors">
-                            {product.icon}
-                        </div>
-                        <h3 className="mb-3 text-xl font-semibold group-hover:text-primary transition-colors">{product.title}</h3>
-                        <p className="text-muted-foreground mb-12 group-hover:text-foreground transition-colors">
-                            {product.description}
-                        </p>
                     </motion.div>
                 ))}
             </div>

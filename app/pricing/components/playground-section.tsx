@@ -20,7 +20,7 @@ import { useChainData } from "../hooks/use-chain-data";
 export default function PlaygroundSection() {
     const { playgroundTokens, isLoading: isLoadingTokens } = usePlaygroundData();
     const { chainData, isLoading: isLoadingChains } = useChainData();
-    const [selectedChain, setSelectedChain] = useState<number>(8453);
+    const [selectedChain, setSelectedChain] = useState<number>(56);
     const [tokenAddress, setTokenAddress] = useState<string>("");
     const [customPrice, setCustomPrice] = useState<number | null>(null);
     const [isLoadingCustom, setIsLoadingCustom] = useState(false);
@@ -161,7 +161,7 @@ export default function PlaygroundSection() {
                                             <img
                                                 src={token.icon}
                                                 alt={token.name}
-                                                className="size-full rounded-full"
+                                                className="size-full rounded-full object-cover"
                                                 onError={(e) => {
                                                     e.currentTarget.src = '/logos/generic-token.svg';
                                                 }}

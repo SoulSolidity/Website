@@ -66,7 +66,13 @@ export default function HeroSection() {
 
                     <div className="flex items-center justify-center gap-x-6">
                         <Link href="#contact">
-                            <Button onClick={() => window.open('https://t.me/doublo', '_blank')} size="lg" className="group relative overflow-hidden">
+                            <Button 
+                                onClick={() => {
+                                    window.location.href = '/#contact';
+                                }} 
+                                size="lg" 
+                                className="group relative overflow-hidden"
+                            >
                                 <span className="relative z-10">Get in Touch</span>
                                 <div className="absolute inset-0 bg-gradient-to-r from-primary/80 to-primary opacity-0 group-hover:opacity-100 transition-opacity" />
                             </Button>

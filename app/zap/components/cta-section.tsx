@@ -33,8 +33,9 @@ export default function CTASection() {
                     <p className="text-muted-foreground mb-6">
                         Need custom Zap solutions for your specific use case? Let's build something amazing together!
                     </p>
-                    
-                    <Button onClick={() => window.open("https://t.me/doublo", "_blank")} size="lg" variant="outline" className="min-w-40" >
+                    <Button onClick={() => {
+                        window.location.href = '/#contact';
+                    }} size="lg" variant="outline" className="min-w-40" >
                         Request Custom Solution
                     </Button>
                 </div>
