@@ -52,14 +52,14 @@ export default function PlaygroundSection() {
         setCustomPrice(null);
         try {
             const response = await fetch(
-                `https://price-getter-api-ee68578946e6.herokuapp.com/price?tokenAddress=${address}&chain=${chainId}`
+                `https://price-getter-api-ee68578946e6.herokuapp.com/price?token=${address}&chain=${chainId}`
             );
             const data = await response.json();
             if (data.error) {
                 setError(data.error);
                 setCustomPrice(null);
             } else {
-                setCustomPrice(Number(data.price));
+                setCustomPrice(Number(data.priceUSD));
                 setTokenInfo({
                     name: data.name || "Unknown Token",
                     symbol: data.symbol || "???"
@@ -269,7 +269,7 @@ export default function PlaygroundSection() {
                                     <div className="overflow-x-auto">
                                         <span className="text-muted-foreground">GET </span>
                                         <span className="text-primary">
-                                            https://price-getter-api-ee68578946e6.herokuapp.com/price?tokenAddress={tokenAddress}&chain={selectedChain}
+                                            https://price-getter-api-ee68578946e6.herokuapp.com/price?token={tokenAddress}&chain={selectedChain}
                                         </span>
                                     </div>
                                     <Button
@@ -277,7 +277,7 @@ export default function PlaygroundSection() {
                                         size="sm"
                                         onClick={() => {
                                             navigator.clipboard.writeText(
-                                                `https://price-getter-api-ee68578946e6.herokuapp.com/price?tokenAddress=${tokenAddress}&chain=${selectedChain}`
+                                                `https://price-getter-api-ee68578946e6.herokuapp.com/price?token=${tokenAddress}&chain=${selectedChain}`
                                             );
                                             setIsCopied(true);
                                             setTimeout(() => setIsCopied(false), 2000);
