@@ -32,6 +32,8 @@ export default function PlaygroundSection() {
     // Filter tokens based on selected chain
     const filteredTokens = playgroundTokens.filter(token => token.chainId === selectedChain);
 
+    const priceApiUrl = (token: string, chain: number) => `${process.env.NEXT_PUBLIC_PRICE_API_URL}/price?token=${token}&chain=${chain}`;
+
     // Update token selection when chain changes
     useEffect(() => {
         if (filteredTokens.length > 0 && !isCustomToken) {
@@ -52,14 +54,14 @@ export default function PlaygroundSection() {
         setCustomPrice(null);
         try {
             const response = await fetch(
-                `https://price-getter-api-ee68578946e6.herokuapp.com/price?token=${address}&chain=${chainId}`
+                priceApiUrl(address, chainId)
             );
             const data = await response.json();
             if (data.error) {
                 setError(data.error);
                 setCustomPrice(null);
             } else {
-                setCustomPrice(Number(data.priceUSD));
+                setCustomPrice(Number(data.price));
                 setTokenInfo({
                     name: data.name || "Unknown Token",
                     symbol: data.symbol || "???"
@@ -269,7 +271,7 @@ export default function PlaygroundSection() {
                                     <div className="overflow-x-auto">
                                         <span className="text-muted-foreground">GET </span>
                                         <span className="text-primary">
-                                            https://price-getter-api-ee68578946e6.herokuapp.com/price?token={tokenAddress}&chain={selectedChain}
+                                            {priceApiUrl(tokenAddress, selectedChain)}
                                         </span>
                                     </div>
                                     <Button
@@ -277,7 +279,7 @@ export default function PlaygroundSection() {
                                         size="sm"
                                         onClick={() => {
                                             navigator.clipboard.writeText(
-                                                `https://price-getter-api-ee68578946e6.herokuapp.com/price?token=${tokenAddress}&chain=${selectedChain}`
+                                                priceApiUrl(tokenAddress, selectedChain)
                                             );
                                             setIsCopied(true);
                                             setTimeout(() => setIsCopied(false), 2000);

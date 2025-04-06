@@ -12,9 +12,7 @@ const ChainDataSchema = z.object({
 type ChainData = z.infer<typeof ChainDataSchema>;
 
 // Define schema for the API response
-const ConstantsResponseSchema = z.object({
-  priceGetterSupportedChainsImages: z.array(ChainDataSchema),
-});
+const ConstantsResponseSchema = z.array(ChainDataSchema);
 
 export function useChainData() {
   const [chainData, setChainData] = useState<ChainData[]>([]);
@@ -27,15 +25,17 @@ export function useChainData() {
   useEffect(() => {
     const fetchChainData = async () => {
       try {
-        const response = await fetch(
-          "https://raw.githubusercontent.com/SoulSolidity/registry/refs/heads/main/data/constants/constants.json"
-        );
+        const url = process.env.NEXT_PUBLIC_PRICE_CHAINS_IMAGES;
+        if (!url) {
+          throw new Error("PRICE_CHAINS_IMAGES is not set");
+        }
+        const response = await fetch(url);
         const rawData = await response.json();
 
         // Validate with Zod
         try {
           const validatedData = ConstantsResponseSchema.parse(rawData);
-          setChainData(validatedData.priceGetterSupportedChainsImages);
+          setChainData(validatedData);
           console.log("Chain data validated successfully");
         } catch (validationError) {
           if (validationError instanceof z.ZodError) {
@@ -53,13 +53,13 @@ export function useChainData() {
             rawData.priceGetterSupportedChainsImages
           )
             ? rawData.priceGetterSupportedChainsImages.filter(
-                (chain: any) =>
-                  typeof chain === "object" &&
-                  chain !== null &&
-                  typeof chain.name === "string" &&
-                  typeof chain.image === "string" &&
-                  typeof chain.chainId === "number"
-              )
+              (chain: any) =>
+                typeof chain === "object" &&
+                chain !== null &&
+                typeof chain.name === "string" &&
+                typeof chain.image === "string" &&
+                typeof chain.chainId === "number"
+            )
             : [];
 
           setChainData(validChains);

@@ -54,9 +54,7 @@ export interface DexProtocol {
     protocol: (typeof PROTOCOL_TYPES)[keyof typeof PROTOCOL_TYPES];
 }
 
-export interface DexFactories {
-    dexFactories: Record<string, DexProtocol[]>;
-}
+export type DexFactories = Record<string, DexProtocol[]>;
 
 export interface Chain {
     id: number;

@@ -15,9 +15,7 @@ const PlaygroundTokenSchema = z.object({
 type PlaygroundToken = z.infer<typeof PlaygroundTokenSchema>;
 
 // Define schema for the API response
-const ConstantsResponseSchema = z.object({
-  priceGetterPlaygroundTokens: z.array(PlaygroundTokenSchema),
-});
+const ConstantsResponseSchema = z.array(PlaygroundTokenSchema);
 
 export function usePlaygroundData() {
   const [playgroundTokens, setPlaygroundTokens] = useState<PlaygroundToken[]>(
@@ -32,15 +30,17 @@ export function usePlaygroundData() {
   useEffect(() => {
     const fetchPlaygroundData = async () => {
       try {
-        const response = await fetch(
-          "https://raw.githubusercontent.com/SoulSolidity/registry/refs/heads/main/data/constants/constants.json"
-        );
+        const url = process.env.NEXT_PUBLIC_PRICE_PLAYGROUND_TOKENS;
+        if (!url) {
+          throw new Error("PRICE_PLAYGROUND_TOKENS is not set");
+        }
+        const response = await fetch(url);
         const rawData = await response.json();
 
         // Validate with Zod
         try {
           const validatedData = ConstantsResponseSchema.parse(rawData);
-          setPlaygroundTokens(validatedData.priceGetterPlaygroundTokens);
+          setPlaygroundTokens(validatedData);
           console.log("Playground data validated successfully");
         } catch (validationError) {
           if (validationError instanceof z.ZodError) {
@@ -56,13 +56,13 @@ export function usePlaygroundData() {
           // Fallback to manual validation for resilience
           const validTokens = Array.isArray(rawData.priceGetterPlaygroundTokens)
             ? rawData.priceGetterPlaygroundTokens.filter(
-                (token: any) =>
-                  typeof token === "object" &&
-                  token !== null &&
-                  typeof token.name === "string" &&
-                  typeof token.address === "string" &&
-                  typeof token.chainId === "number"
-              )
+              (token: any) =>
+                typeof token === "object" &&
+                token !== null &&
+                typeof token.name === "string" &&
+                typeof token.address === "string" &&
+                typeof token.chainId === "number"
+            )
             : [];
 
           setPlaygroundTokens(validTokens);

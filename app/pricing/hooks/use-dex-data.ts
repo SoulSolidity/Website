@@ -18,9 +18,7 @@ const DexProtocolSchema = z.object({
   ]),
 });
 
-const DexFactoriesSchema = z.object({
-  dexFactories: z.record(z.string(), z.array(DexProtocolSchema)),
-});
+const DexFactoriesSchema = z.record(z.string(), z.array(DexProtocolSchema));
 
 export function useDexData() {
   const [dexData, setDexData] = useState<DexFactories | null>(null);
@@ -33,10 +31,13 @@ export function useDexData() {
   useEffect(() => {
     const fetchDexData = async () => {
       try {
-        const response = await fetch(
-          "https://raw.githubusercontent.com/SoulSolidity/registry/refs/heads/main/data/constants/dex.json"
-        );
+        const url = process.env.NEXT_PUBLIC_PRICE_DEX_REGISTRY;
+        if (!url) {
+          throw new Error("PRICE_DEX_REGISTRY is not set");
+        }
+        const response = await fetch(url);
         const rawData = await response.json();
+        console.log("rawData", rawData);
 
         // Validate data with Zod
         try {
@@ -72,7 +73,7 @@ export function useDexData() {
 
     const uniqueDexes = new Set<string>();
     try {
-      Object.values(dexData.dexFactories).forEach((chainDexes) => {
+      Object.values(dexData).forEach((chainDexes) => {
         chainDexes.forEach((dex) => {
           if (
             typeof dex === "object" &&
@@ -95,7 +96,7 @@ export function useDexData() {
 
     const uniqueDexMap = new Map<string, DexProtocol>();
     try {
-      Object.values(dexData.dexFactories).forEach((chainDexes) => {
+      Object.values(dexData).forEach((chainDexes) => {
         chainDexes.forEach((dex) => {
           if (
             typeof dex === "object" &&
